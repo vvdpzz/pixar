@@ -99,11 +99,19 @@ setTimeout(function(){
   Pixar.contentEditor = new nicEditor({
     buttonList: ['bold','italic','underline', 'strikethrough', 'ol', 'ul', 'hr']
   }).panelInstance('content');
+  
   $('#customized_credit').blur().focus(function(){
     $('#radio_customized_credit').prop('checked', true);
   });
   $('#radio_customized_credit').change(function(){ 
     $('#customized_credit').focus();
+  });
+  
+  $('#customized_reputation').blur().focus(function(){
+    $('#radio_customized_reputation').prop('checked', true);
+  });
+  $('#radio_customized_reputation').change(function(){
+    $('#customized_reputation').focus();
   });
   $('#rules_0').change(function(){
     if ($(this).prop('checked'))
