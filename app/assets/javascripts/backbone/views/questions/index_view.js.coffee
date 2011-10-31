@@ -4,6 +4,7 @@ class Pixar.Views.Questions.IndexView extends Backbone.View
   template: JST["backbone/templates/questions/index"]
   tagName: "ul"
   id: "questions"
+  className: "questions"
     
   initialize: () ->
     _.bindAll(this, 'addOne', 'addAll', 'render')
