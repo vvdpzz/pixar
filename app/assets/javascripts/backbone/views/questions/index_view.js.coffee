@@ -2,6 +2,8 @@ Pixar.Views.Questions ||= {}
 
 class Pixar.Views.Questions.IndexView extends Backbone.View
   template: JST["backbone/templates/questions/index"]
+  tagName: "ul"
+  id: "questions"
     
   initialize: () ->
     _.bindAll(this, 'addOne', 'addAll', 'render')
@@ -13,7 +15,7 @@ class Pixar.Views.Questions.IndexView extends Backbone.View
   
   addOne: (question) ->
     view = new Pixar.Views.Questions.QuestionView({model : question})
-    @$("tbody").append(view.render().el)
+    @$(@el).append(view.render().el)
        
   render: ->
     $(@el).html(@template(questions: @options.questions.toJSON() ))

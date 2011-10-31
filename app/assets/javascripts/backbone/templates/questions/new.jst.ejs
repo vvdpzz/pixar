@@ -1,50 +1,23 @@
-<h1>New question</h1>
-
 <form id="new-question" name="question">
-  <div class="field">
-    <label for="title"> title:</label>
-    <input type="text" name="title" id="title" value="<%= title %>" >
-  </div>
-
-  <div class="field">
-    <label for="content"> content:</label>
-    <input type="text" name="content" id="content" value="<%= content %>" >
-  </div>
-
-  <div class="field">
-    <label for="rules_list"> rules_list:</label>
-    <input type="text" name="rules_list" id="rules_list" value="<%= rules_list %>" >
-  </div>
-
-  <div class="field">
-    <label for="customized_rule"> customized_rule:</label>
-    <input type="text" name="customized_rule" id="customized_rule" value="<%= customized_rule %>" >
-  </div>
-
-  <div class="field">
-    <label for="credit"> credit:</label>
-    <input type="text" name="credit" id="credit" value="<%= credit %>" >
-  </div>
-
-  <div class="field">
-    <label for="reputation"> reputation:</label>
-    <input type="text" name="reputation" id="reputation" value="<%= reputation %>" >
-  </div>
-
-  <div class="field">
-    <label for="is_blind"> is_blind:</label>
-    <input type="text" name="is_blind" id="is_blind" value="<%= is_blind %>" >
-  </div>
-
-  <div class="field">
-    <label for="is_community"> is_community:</label>
-    <input type="text" name="is_community" id="is_community" value="<%= is_community %>" >
-  </div>
-
-  <div class="actions">
-    <input type="submit" value="Create Question" />
-  </div>
-
+  <fieldset>
+    <legend>New question</legend>
+    <div class="clearfix">
+      <label for="title">Title</label>
+      <div class="input">
+        <input class="xxlarge" size="30" type="text" name="title" id="title" value="<%= title %>" >
+      </div>
+    </div>
+    <div class="clearfix">
+      <label for="content">Content</label>
+      <div class="input">
+        <textarea class="xxlarge" rows="3" id="content" value="<%= content %>"></textarea>
+        <span class="help-block">
+          Block of help text to describe the field above if need be.
+        </span>
+      </div>
+    </div>
+    <div class="actions">
+      <button type="submit" class="btn primary">Create Question</button>&nbsp;<a href="#/index" class="btn">Back</a>
+    </div>
+  </fieldset>
 </form>
-
-<a href="#/index">Back</a>

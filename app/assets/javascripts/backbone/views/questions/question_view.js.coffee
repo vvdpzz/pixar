@@ -6,8 +6,11 @@ class Pixar.Views.Questions.QuestionView extends Backbone.View
   events:
     "click .destroy" : "destroy"
       
-  tagName: "tr"
+  tagName: "li"
   
+  initialize: () ->
+    @$(@el).attr("id", @model.id)
+    
   destroy: () ->
     @model.destroy()
     this.remove()
