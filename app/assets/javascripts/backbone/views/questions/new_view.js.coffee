@@ -21,7 +21,8 @@ class Pixar.Views.Questions.NewView extends Backbone.View
     @model.unset("errors")
     
     allCheckedRules = @$('#new-question').find('input[type=checkbox]:checked')
-    checkedList = (parseInt $(e).val() for e in allCheckedRules)
+    checkedList = (parseInt($(e).attr('id').slice(6),10) for e in allCheckedRules)
+    
     @model.set({
       content: @$('#new-question').find('.nicEdit-main').html(),
       rules_list: checkedList.join(',')
