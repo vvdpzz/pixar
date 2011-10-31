@@ -20,6 +20,8 @@ class Pixar.Views.Questions.NewView extends Backbone.View
       
     @model.unset("errors")
     
+    @model.set({content: @$('#new-question').find('.nicEdit-main').html()})
+    
     @collection.create(@model.toJSON(), 
       success: (question) =>
         @model = question
