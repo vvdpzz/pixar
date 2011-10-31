@@ -26,33 +26,27 @@
           <li>
             <label>
               <input type="checkbox" name="rules_list" id="rules_1">
-              <span>In the case of duplicated entries, the first entry submitted will win</span>
+              <span>相似答案，先答为胜</span>
             </label>
           </li>
           <li>
             <label>
               <input type="checkbox" name="rules_list" id="rules_2">
-              <span>Entries should include reference images</span>
+              <span>答案需要包含图片</span>
             </label>
           </li>
           <li>
             <label>
               <input type="checkbox" name="rules_list" id="rules_3">
-              <span>Entries should be no less than 200 words</span>
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="checkbox" name="rules_list" id="rules_4">
-              <span>Only allow verified users to participate</span>
+              <span>答案不能少于200字</span>
             </label>
           </li>
           <li>
             <label>
               <input type="checkbox" name="rules_list" id="rules_0">
-              <span>Additional rules</span>
+              <span>额外的规则</span>
             </label>
-            <textarea id="additional-rule" name="customized_rule" class="xxlarge" row=3></textarea>
+            <textarea id="additional_rule" name="customized_rule" class="xxlarge" row=3></textarea>
           </li>
         </ul>
         <span class="help-block">
@@ -62,16 +56,36 @@
     </div>
     <!-- credit -->
     <div class="clearfix">
-      <label id="optionsRadio">赏金</label>
+      <label for="default_credit">赏金</label>
       <div class="input">
-        <label>
-          <input type="radio" checked="" name="credit" value="1">
-          <span>$ 1</span>
-        </label>
-        <label>
+          <input type="radio" checked="checked" name="credit" value="1" id="default_credit">
+          <span class="credit_value">¥ 1.0</span>
           <input type="radio" name="credit" value="2">
-          <span>$ 2</span>
-        </label>
+          <span class="credit_value">¥ 2.0</span>
+          <input type="radio" name="credit" value="5">
+          <span class="credit_value">¥ 5.0</span>
+          <input type="radio" name="credit" value="10">
+          <span class="credit_value">¥ 10.0</span>
+          <input type="radio" name="credit" id="radio_customized_credit">
+          <span>其它: ¥</span>
+          <input type="text" class="span2" name="user_credit" autocomplete="off" id="customized_credit">
+      </div>
+    </div>
+    <!-- reputation -->
+    <div class="clearfix">
+      <label for="reputation">积分</label>
+      <div class="input">
+        <input type="radio" checked="checked" name="reputation" value="0" id="default_reputation">
+        <span class="reputation_value">0</span>
+        <input type="radio" name="reputation" value="5">
+        <span class="reputation_value">5</span>
+        <input type="radio" name="reputation" value="10">
+        <span class="reputation_value">10</span>
+        <input type="radio" name="reputation" value="20">
+        <span class="reputation_value">20</span>
+        <input type="radio" name="reputation" id="radio_customized_reputation">
+        <span>其它: </span>
+        <input type="text" class="span2" name="user_reputation" autocomplete="off" id="customized_reputation" value="<%= reputation %>" >
       </div>
     </div>
     <!-- actions -->
@@ -85,11 +99,17 @@ setTimeout(function(){
   Pixar.contentEditor = new nicEditor({
     buttonList: ['bold','italic','underline', 'strikethrough', 'ol', 'ul', 'hr']
   }).panelInstance('content');
+  $('#customized_credit').blur().focus(function(){
+    $('#radio_customized_credit').prop('checked', true);
+  });
+  $('#radio_customized_credit').change(function(){ 
+    $('#customized_credit').focus();
+  });
   $('#rules_0').change(function(){
     if ($(this).prop('checked'))
-      $('#additional-rule').show();
+      $('#additional_rule').show().focus();
     else
-      $('#additional-rule').hide();
+      $('#additional_rule').hide();
   });
   },0);
 </script>

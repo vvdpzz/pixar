@@ -40,6 +40,14 @@ class QuestionsController < ApplicationController
   # POST /questions
   # POST /questions.json
   def create
+    params[:question][:credit] = params[:question][:user_credit] if params[:question][:user_credit].to_i > 0
+    params[:question].delete(:user_credit)
+    
+    if params[:question][:user_reputation].to_i > 0
+      params[:question][:reputation] = params[:question][:user_reputation]
+    end
+    params[:question].delete(:user_reputation)
+    
     @question = current_user.questions.build(params[:question])
 
     respond_to do |format|
