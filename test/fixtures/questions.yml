@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user: 
+  title: MyString
+  content: MyText
+  rules_list: MyString
+  customized_rule: MyString
+  credit: 1.5
+  reputation: 1
+  is_blind: false
+  is_community: false
+
+two:
+  user: 
+  title: MyString
+  content: MyText
+  rules_list: MyString
+  customized_rule: MyString
+  credit: 1.5
+  reputation: 1
+  is_blind: false
+  is_community: false

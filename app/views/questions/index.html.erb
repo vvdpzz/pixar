@@ -1,0 +1,39 @@
+<h1>Listing questions</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Title</th>
+    <th>Content</th>
+    <th>Rules list</th>
+    <th>Customized rule</th>
+    <th>Credit</th>
+    <th>Reputation</th>
+    <th>Is blind</th>
+    <th>Is community</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @questions.each do |question| %>
+  <tr>
+    <td><%= question.user %></td>
+    <td><%= question.title %></td>
+    <td><%= question.content %></td>
+    <td><%= question.rules_list %></td>
+    <td><%= question.customized_rule %></td>
+    <td><%= question.credit %></td>
+    <td><%= question.reputation %></td>
+    <td><%= question.is_blind %></td>
+    <td><%= question.is_community %></td>
+    <td><%= link_to 'Show', question %></td>
+    <td><%= link_to 'Edit', edit_question_path(question) %></td>
+    <td><%= link_to 'Destroy', question, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Question', new_question_path %>

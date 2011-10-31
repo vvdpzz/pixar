@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @question.user %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @question.title %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @question.content %>
+</p>
+
+<p>
+  <b>Rules list:</b>
+  <%= @question.rules_list %>
+</p>
+
+<p>
+  <b>Customized rule:</b>
+  <%= @question.customized_rule %>
+</p>
+
+<p>
+  <b>Credit:</b>
+  <%= @question.credit %>
+</p>
+
+<p>
+  <b>Reputation:</b>
+  <%= @question.reputation %>
+</p>
+
+<p>
+  <b>Is blind:</b>
+  <%= @question.is_blind %>
+</p>
+
+<p>
+  <b>Is community:</b>
+  <%= @question.is_community %>
+</p>
+
+
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', questions_path %>
