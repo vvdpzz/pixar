@@ -37,3 +37,15 @@
 <br />
 
 <%= link_to 'New Question', new_question_path %>
+
+
+<hr/ >
+
+<div id="questions"></div>
+
+<script type="text/javascript">
+  $(function() {
+    window.router = new Pixar.Routers.QuestionsRouter({questions: <%= @questions.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>
