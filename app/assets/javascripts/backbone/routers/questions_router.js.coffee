@@ -12,21 +12,21 @@ class Pixar.Routers.QuestionsRouter extends Backbone.Router
 
   newQuestion: ->
     @view = new Pixar.Views.Questions.NewView(collection: @questions)
-    $("#content").html(@view.render().el)
+    $("#main-content").html(@view.render().el)
 
   index: ->
     @view = new Pixar.Views.Questions.IndexView(questions: @questions)
-    $("#content").html(@view.render().el)
+    $("#main-content").html(@view.render().el)
 
   show: (id) ->
     question = @questions.get(id)
     
     @view = new Pixar.Views.Questions.ShowView(model: question)
-    $("#content").html(@view.render().el)
+    $("#main-content").html(@view.render().el)
     
   edit: (id) ->
     question = @questions.get(id)
 
     @view = new Pixar.Views.Questions.EditView(model: question)
-    $("#content").html(@view.render().el)
+    $("#main-content").html(@view.render().el)
   
