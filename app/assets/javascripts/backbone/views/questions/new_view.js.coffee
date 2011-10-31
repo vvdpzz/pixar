@@ -20,7 +20,13 @@ class Pixar.Views.Questions.NewView extends Backbone.View
       
     @model.unset("errors")
     
-    @model.set({content: @$('#new-question').find('.nicEdit-main').html()})
+    allCheckedRules = @$('#new-question').find('input[type=checkbox]:checked')
+    checkedList = (parseInt $(e).val() for e in allCheckedRules)
+    @model.set({
+      content: @$('#new-question').find('.nicEdit-main').html(),
+      rules_list: checkedList.join(',')
+    })
+    
     
     @collection.create(@model.toJSON(), 
       success: (question) =>
