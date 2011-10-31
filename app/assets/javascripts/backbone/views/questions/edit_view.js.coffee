@@ -14,6 +14,10 @@ class Pixar.Views.Questions.EditView extends Backbone.View
       success : (question) =>
         @model = question
         window.location.hash = "/#{@model.id}"
+      error : (question, response) =>
+        alert "error"
+        alert JSON.stringify question
+        alert JSON.stringify response
     )
     
   render : ->
