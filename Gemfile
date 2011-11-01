@@ -15,7 +15,7 @@ gem 'uuidtools'
 
 gem 'hiredis'
 gem 'redis', :require => ["redis/connection/hiredis", "redis"]
-
+gem 'activeadmin'
 group :linux do
   gem 'execjs'
   gem 'therubyracer'
