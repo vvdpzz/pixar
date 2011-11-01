@@ -3,7 +3,7 @@ ul.questions{
     font-weight:normal;
   }
 }
-#additional_rule{
+#additional_rule, #dlg_new_answer{
   display:none;
 }
 .credit_label{
@@ -11,4 +11,8 @@ ul.questions{
 }
 .credit_value, .reputation_value{
   margin-right:30px;
+}
+#new-answer{
+  margin-top:10px;
+  margin-bottom:5px;
 }
