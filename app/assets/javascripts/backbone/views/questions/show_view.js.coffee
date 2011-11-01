@@ -32,12 +32,12 @@ class Pixar.Views.Questions.ShowView extends Backbone.View
       width: 568
       height: "auto"
       resizable: false
-      title: "Your answer"
+      title: "你的答案"
       dialogClass: "no-opacity-disabled"
       buttons:
-        Discard: ->
+        '取消': ->
           $(this).dialog "close"
-        Submit: ->
+        '提交': ->
           alert "ok"
       open: ->
         $(".ui-dialog-buttonpane :tabbable").blur().removeClass "ui-state-focus"
