@@ -6,6 +6,9 @@ class Pixar.Views.Questions.NewView extends Backbone.View
   events:
     "submit #new-question": "save"
     
+  initialize: () ->
+    _.bindAll(this, 'render', 'initEffect')
+  
   constructor: (options) ->
     super(options)
     @model = new @collection.model()
@@ -43,4 +46,25 @@ class Pixar.Views.Questions.NewView extends Backbone.View
     
     this.$("form").backboneLink(@model)
     
+    this.initEffect()
+    
     return this
+  
+  initEffect: ->
+    @$("#customized_credit").blur().focus ->
+      $("#radio_customized_credit").prop "checked", true
+    
+    @$("#radio_customized_credit").change ->
+      $("#customized_credit").focus()
+    
+    @$("#customized_reputation").blur().focus ->
+      $("#radio_customized_reputation").prop "checked", true
+    
+    @$("#radio_customized_reputation").change ->
+      $("#customized_reputation").focus()
+    
+    @$("#rules_0").change ->
+      if $(this).prop("checked")
+        $("#additional_rule").show().focus()
+      else
+        $("#additional_rule").hide()
