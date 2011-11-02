@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
   include Extensions::UUID
   # Include default devise modules. Others available are:
   # :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :token_authenticatable, :database_authenticatable, :registerable,
+  # , :registerable
+  devise :token_authenticatable, :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
