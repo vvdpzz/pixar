@@ -18,7 +18,7 @@ class CreateQuestions < ActiveRecord::Migration
       t.integer :end_date, :default => 0
       
       t.integer :votes_count, :default => 0
-      t.integer :entries_count, :default  => 0
+      t.integer :answers_count, :default  => 0
       t.integer :comments_count, :default => 0
 
       t.timestamps

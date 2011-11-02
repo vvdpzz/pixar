@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  before_filter :vote_init, :only => [:vote_for, :vote_against]
+  
   # GET /questions
   # GET /questions.json
   def index
@@ -88,4 +90,46 @@ class QuestionsController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  def answers
+    question = Question.find params[:question_id]
+    render json: question.answers.collect{|answer| answer.as_json}, status: :ok
+  end
+  
+  # TODO vvdpzz will do vote day limit
+  # PUT /questions/:id/vote_for
+  def vote_for
+    if current_user.credit >= Settings.vote_for_limit and @voted != true
+      if @voted == nil
+        if current_user.vote_for @question
+          render json: {:id => @question.id, :votes_count => @question.plusminus}, status: :ok
+        end
+      else
+        if current_user.vote_exclusively_against @question
+          render json: {:id => @question.id, :votes_count => @question.plusminus}, status: :ok
+        end
+      end
+    end
+  end
+  
+  # PUT /questions/:id/vote_against
+  def vote_against
+    if current_user.reputation >= Settings.vote_against_limit and @voted != false
+      if @voted == nil
+        if current_user.vote_against @question
+          render json: {:id => @question.id, :votes_count => @question.plusminus}, status: :ok
+        end
+      else
+        if current_user.vote_exclusively_for @question
+          render json: {:id => @question.id, :votes_count => @question.plusminus}, status: :ok
+        end
+      end
+    end
+  end
+  
+  protected
+    def vote_init
+      @question = Question.select("id").find_by_id(params[:id])
+      @voted = @question.trivalent_voted_by? current_user
+    end
 end

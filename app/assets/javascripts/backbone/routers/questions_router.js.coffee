@@ -24,6 +24,7 @@ class Pixar.Routers.QuestionsRouter extends Backbone.Router
     @view = new Pixar.Views.Questions.ShowView(model: question)
     $("#main-content").html(@view.render().el)
     
+    
   edit: (id) ->
     question = @questions.get(id)
 

@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111031021205) do
+ActiveRecord::Schema.define(:version => 20111102092636) do
+
+  create_table "answers", :id => false, :force => true do |t|
+    t.integer  "id",             :limit => 8
+    t.integer  "user_id",        :limit => 8,                    :null => false
+    t.integer  "question_id",    :limit => 8,                    :null => false
+    t.text     "content"
+    t.boolean  "is_correct",                  :default => false
+    t.integer  "votes_count",                 :default => 0
+    t.integer  "comments_count",              :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
+  add_index "answers", ["user_id"], :name => "index_answers_on_user_id"
 
   create_table "questions", :id => false, :force => true do |t|
     t.integer  "id",              :limit => 8
@@ -26,7 +41,7 @@ ActiveRecord::Schema.define(:version => 20111031021205) do
     t.boolean  "is_community",                                               :default => false
     t.integer  "end_date",                                                   :default => 0
     t.integer  "votes_count",                                                :default => 0
-    t.integer  "entries_count",                                              :default => 0
+    t.integer  "answers_count",                                              :default => 0
     t.integer  "comments_count",                                             :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -37,6 +52,8 @@ ActiveRecord::Schema.define(:version => 20111031021205) do
   create_table "users", :primary_key => "email", :force => true do |t|
     t.integer  "id",                     :limit => 8
     t.string   "name",                                                                :default => ""
+    t.string   "avatar",                                                              :default => ""
+    t.string   "about_me",                                                            :default => ""
     t.string   "encrypted_password",     :limit => 128,                               :default => "",  :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -59,5 +76,19 @@ ActiveRecord::Schema.define(:version => 20111031021205) do
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "votes", :force => true do |t|
+    t.boolean  "vote",                       :default => false
+    t.integer  "voteable_id",   :limit => 8,                    :null => false
+    t.integer  "voter_id",      :limit => 8,                    :null => false
+    t.string   "voter_type",                                    :null => false
+    t.string   "voteable_type",                                 :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["voteable_id", "voteable_type"], :name => "index_votes_on_voteable_id_and_voteable_type"
+  add_index "votes", ["voter_id", "voter_type", "voteable_id", "voteable_type"], :name => "fk_one_vote_per_user_per_entity", :unique => true
+  add_index "votes", ["voter_id", "voter_type"], :name => "index_votes_on_voter_id_and_voter_type"
 
 end

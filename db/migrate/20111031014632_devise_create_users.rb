@@ -2,7 +2,11 @@ class DeviseCreateUsers < ActiveRecord::Migration
   def change
     create_table :users, :id => false do |t|
       t.integer :id, :limit => 8, :primary => true
+      
       t.string :name, :default => ""
+      t.string :avatar, :default => ""
+      t.string :about_me, :default => ""
+      
       t.database_authenticatable :null => false
       t.recoverable
       t.rememberable

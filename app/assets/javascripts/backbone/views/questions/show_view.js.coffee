@@ -3,19 +3,28 @@ Pixar.Views.Questions ||= {}
 class Pixar.Views.Questions.ShowView extends Backbone.View
   template: JST["backbone/templates/questions/show"]
   
+  className: "question"
+  
   events:
     "click #answer_button" : "enterSubmission"
   
   initialize: () ->
-    _.bindAll(this, 'render', 'initButtons', 'initDialogs')
+    _.bindAll(this, 'render', 'initButtons', 'initDialogs', "load_answers")
+    @answerCollection = new Pixar.Collections.AnswersCollection([], {id: @model.id})
+    self = this
+    @answerCollection.fetch
+      success: =>
+        self.load_answers()
   
   render: ->
     $(this.el).html(@template(@model.toJSON() ))
-  
     this.initButtons()
     this.initDialogs()
-  
     return this
+  
+  load_answers: ->
+    answersView = new Pixar.Views.Answers.answersView(collection: @answerCollection)
+    $(this.el).append(answersView.render().el)
   
   enterSubmission: ->
     $('#dlg_new_answer').dialog('open')
@@ -26,6 +35,7 @@ class Pixar.Views.Questions.ShowView extends Backbone.View
     @$("#answer_button").button()
   
   initDialogs: ->
+    self = this
     newAnswerDialog =
       autoOpen: false
       modal: true
@@ -38,7 +48,18 @@ class Pixar.Views.Questions.ShowView extends Backbone.View
         '取消': ->
           $(this).dialog "close"
         '提交': ->
-          alert "ok"
+          answer = new Pixar.Models.Answer({
+            question_id: self.model.id,
+            content: $('#new-answer').find('.nicEdit-main').html()
+          })
+          
+          self.answerCollection.create(answer.toJSON(),
+            success: (answer) =>
+              $('#new-answer').find('.nicEdit-main').html("")
+              $(this).dialog "close"
+            error: (answer, jqXHR) =>
+              alert "error"
+          )
       open: ->
         $(".ui-dialog-buttonpane :tabbable").blur().removeClass "ui-state-focus"
         content = $("#content").val()

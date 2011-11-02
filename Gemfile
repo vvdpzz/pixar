@@ -11,6 +11,11 @@ gem 'mysql2'
 # https://github.com/plataformatec/devise
 gem 'devise'
 
+# https://github.com/brady8/thumbs_up
+gem 'thumbs_up'
+
+gem 'settingslogic'
+
 gem 'uuidtools'
 
 gem 'hiredis'

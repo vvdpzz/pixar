@@ -1,5 +1,13 @@
 Pixar::Application.routes.draw do
-  resources :questions
+  resources :questions do
+    member do
+      get :answers
+      put :vote_for
+      put :vote_against
+    end
+  end
+  
+  resources :answers, :only => [:create]
 
   devise_for :users
 

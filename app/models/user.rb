@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   before_create :ensure_authentication_token
   
   has_many :questions
-  # has_many :answers
+  has_many :answers
   # has_many :comments
+  
+  acts_as_voter
 end
