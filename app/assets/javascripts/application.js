@@ -12,3 +12,7 @@
 //= require backbone_datalink
 //= require backbone/pixar
 //= require_tree .
+
+$(function(){
+  Pixar.initialize();
+})

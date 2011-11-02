@@ -1,5 +1,11 @@
 Pixar::Application.routes.draw do
   resources :questions
+  
+  resources :messages do
+    collection do
+      get "load_conversations"
+    end
+  end
 
   devise_for :users
 
