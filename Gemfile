@@ -20,7 +20,13 @@ gem 'uuidtools'
 
 gem 'hiredis'
 gem 'redis', :require => ["redis/connection/hiredis", "redis"]
+
 gem 'activeadmin'
+
+# Payment
+gem 'activemerchant'
+gem 'activemerchant_patch_for_china'
+
 group :linux do
   gem 'execjs'
   gem 'therubyracer'
