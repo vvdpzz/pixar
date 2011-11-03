@@ -8,8 +8,13 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require underscore
+//= require utils
 //= require backbone
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/pixar
 //= require_tree .
+
+$(function(){
+  Pixar.initialize();
+})

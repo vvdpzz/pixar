@@ -17,4 +17,7 @@ class User < ActiveRecord::Base
   has_many :recharge_records
   
   acts_as_voter
+  def self.basic(id)
+    User.select("id,name,picture").find_by_id(id)
+  end
 end
