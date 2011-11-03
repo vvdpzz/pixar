@@ -137,7 +137,7 @@ class QuestionsController < ApplicationController
       respond_to do |format|
         #if category_question.save
         if strong_inert
-          format.json { :category_id => category_id, :question_id => question_id}, status: :ok
+          format.json { head :ok }
         else
           format.json { render json: strong_inert.errors, status: :unprocessable_entity }
         end
