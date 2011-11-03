@@ -4,6 +4,7 @@ Pixar::Application.routes.draw do
   resources :messages do
     collection do
       get "load_conversations"
+      post "send_message"
     end
   end
 

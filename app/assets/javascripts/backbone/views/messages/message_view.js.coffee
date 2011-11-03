@@ -10,8 +10,6 @@ class Pixar.Views.Messages.MessageView extends Backbone.View
     @model = @options.model
     
   set: ->
-    @$('.message-entry:visible').first().addClass('message-first-entry');
-    @$('.message-reply-box').show();
   
   render: ->
     $(@el).html(@template(message: @options.model.toJSON() ))

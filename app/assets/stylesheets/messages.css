@@ -371,19 +371,6 @@ Message Box - Message View
 
 
 
-.message-first-entry {
-  border-top: 0;
-}
-.message-entry, .message-first-entry {
-  width: 628px;
-  background: white;
-  border-right: 1px solid #CCC;
-  border-left: 1px solid #CCC;
-  border-top: 1px solid #CCC;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  position: relative;
-}
 .clearfix {
   zoom: 1;
 }  
@@ -395,10 +382,4 @@ Message Box - Message View
 }
 .clearfix::after {
   clear: both;
-}
-.clearfix::before, .clearfix::after {
-  content: " 0020";
-  display: block;
-  height: 0;
-  visibility: hidden;
 }

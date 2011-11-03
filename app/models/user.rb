@@ -13,4 +13,7 @@ class User < ActiveRecord::Base
   has_many :questions
   # has_many :answers
   # has_many :comments
+  def self.basic(id)
+    User.select("id,name,picture").find_by_id(id)
+  end
 end

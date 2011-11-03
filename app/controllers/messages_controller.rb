@@ -85,7 +85,7 @@ class MessagesController < ApplicationController
     hash[:created_at]     = Time.now
     hash[:text]           = params[:text]
     hash[:sender_id]      = sender.id.to_s
-    hash[:sender_name]    = sender.username
+    hash[:sender_name]    = sender.name
     
     # add to user's unread message list
     $redis.rpush("messages:#{receiver.id}:unread_messages", MultiJson.encode(hash))
