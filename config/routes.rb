@@ -1,4 +1,6 @@
 Pixar::Application.routes.draw do
+  #match '/questions/:id/category_add/:category_name' 'questions#category_add'
+  
   resources :questions do
     member do
       get :answers

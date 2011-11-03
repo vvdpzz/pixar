@@ -127,6 +127,45 @@ class QuestionsController < ApplicationController
     end
   end
   
+  # PUT /questions/:id/category_add/:category_name
+  def category_add
+      category_id = Category.find params[:category_name]
+      question_id = params[:id]
+      strong_inert = ActiveRecord::Base.connection.execute("INSERT INTO category_questions SET category_id=#{category_id},question_id=#{question_id}")
+#      category_question = CategoryQuestion.new (:category_id=>category_id,:question_id=>question_id)
+#      category_question = CategoryQuestion.new ( :category_id=>1, :question_id=>2932718821909611 )
+      respond_to do |format|
+        #if category_question.save
+        if strong_inert
+          format.json { :category_id => category_id, :question_id => question_id}, status: :ok
+        else
+          format.json { render json: strong_inert.errors, status: :unprocessable_entity }
+        end
+      end
+  end
+  
+  # PUT /questions/:id/category_del/:category_name
+  def category_del
+    category_id   = Category.find params[:category_name]
+    question_id   = params[:id]
+    strong_delete  = ActiveRecord::Base.connection.execute("DELETE category_questions WHERE category_id=#{category_id} and question_id=#{question_id}")
+    respond_to do |format|
+      if strong_inert
+        format.json { head :ok }
+      else
+        format.json { render json: strong_delete.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  def tag_add
+  
+  end
+  
+  def tag_del
+    
+  end
+  
   protected
     def vote_init
       @question = Question.select("id").find_by_id(params[:id])
