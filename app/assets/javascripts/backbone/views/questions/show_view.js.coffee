@@ -27,7 +27,7 @@ class Pixar.Views.Questions.ShowView extends Backbone.View
     $(this.el).append(answersView.render().el)
   
   enterSubmission: ->
-    $('#dlg_new_answer').dialog('open')
+    @dialog.dialog('open')
     new nicEditor(buttonList: [ "bold", "italic", "underline", "strikethrough", "ol", "ul", "hr" ]).panelInstance("content")
     $('#dlg_new_answer_error').html("").hide()
 
@@ -46,7 +46,7 @@ class Pixar.Views.Questions.ShowView extends Backbone.View
       dialogClass: "no-opacity-disabled"
       buttons:
         '取消': ->
-          $(this).dialog "close"
+          self.dialog.dialog "close"
         '提交': ->
           answer = new Pixar.Models.Answer({
             question_id: self.model.id,
@@ -56,7 +56,7 @@ class Pixar.Views.Questions.ShowView extends Backbone.View
           self.answerCollection.create(answer.toJSON(),
             success: (answer) =>
               $('#new-answer').find('.nicEdit-main').html("")
-              $(this).dialog "close"
+              self.dialog.dialog "close"
             error: (answer, jqXHR) =>
               alert "error"
           )
@@ -65,4 +65,5 @@ class Pixar.Views.Questions.ShowView extends Backbone.View
         content = $("#content").val()
         content = ""  unless content
       close: ->
-    @$("#dlg_new_answer").dialog(newAnswerDialog)
+    @dialog = @$("#dlg_new_answer")
+    @dialog.dialog(newAnswerDialog)
