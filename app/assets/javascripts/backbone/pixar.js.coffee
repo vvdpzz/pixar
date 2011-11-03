@@ -9,3 +9,8 @@ window.Pixar =
   Collections: {}
   Routers: {}
   Views: {}
+  
+  initialize: ->
+    new Pixar.Routers.MessagesRouter
+    
+    
