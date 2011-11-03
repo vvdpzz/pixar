@@ -1,4 +1,6 @@
 Pixar::Application.routes.draw do
+  #match '/questions/:id/category_add/:category_name' 'questions#category_add'
+  
   resources :questions do
     member do
       get :answers
@@ -13,6 +15,14 @@ Pixar::Application.routes.draw do
   
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
+  
+  resources :messages do
+    collection do
+      get "load_conversations"
+      post "send_message"
+    end
+  end
+
   devise_for :users
   
   resources :recharge do

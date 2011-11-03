@@ -1,5 +1,13 @@
 # encoding: utf-8
 
+Category.create(
+  [
+    {name: 'IT'},
+    {name: 'Health'},
+    {name: 'Technology'}
+  ]
+)
+
 User.create(
   [
     {
