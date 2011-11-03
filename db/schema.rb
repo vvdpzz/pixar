@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(:version => 20111103074411) do
     t.boolean  "is_community",                                               :default => false
     t.integer  "end_date",                                                   :default => 0
     t.integer  "votes_count",                                                :default => 0
-    t.integer  "entries_count",                                              :default => 0
+    t.integer  "answers_count",                                              :default => 0
     t.integer  "comments_count",                                             :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -123,6 +123,8 @@ ActiveRecord::Schema.define(:version => 20111103074411) do
   create_table "users", :primary_key => "email", :force => true do |t|
     t.integer  "id",                     :limit => 8
     t.string   "name",                                                                :default => ""
+    t.string   "avatar",                                                              :default => ""
+    t.string   "about_me",                                                            :default => ""
     t.string   "encrypted_password",     :limit => 128,                               :default => "",  :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
