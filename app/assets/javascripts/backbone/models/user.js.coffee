@@ -8,7 +8,7 @@ class Pixar.Models.User extends Backbone.Model
     reputation: null
     
   initialize: (b, a) ->
-    @url = '/users/#{a.uid}'
+    @url = "/users/#{a.uid}"
   
 class Pixar.Collections.UsersCollection extends Backbone.Collection
   model: Pixar.Models.User

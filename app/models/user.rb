@@ -7,9 +7,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :id, :name, :email, :password, :remember_me, :authentication_token
+  attr_accessible :id, :name, :email, :avatar, :password, :remember_me, :authentication_token
 
   before_create :ensure_authentication_token
+  after_create :create_profile
   has_one :profile
   has_many :questions
   has_many :answers
@@ -18,7 +19,7 @@ class User < ActiveRecord::Base
   
   acts_as_voter
   def self.basic(id)
-    User.select("id,name,avatar").find_by_id(id)
+    User.select("id,name,avatar, about_me").find_by_id(id)
   end
   
   # follow a user
@@ -56,19 +57,19 @@ class User < ActiveRecord::Base
   # users that self follows
   def followers
     user_ids = $redis.smembers(self.redis_key(:followers))
-    User.where(:id => user_ids)
+    User.find(user_ids)
   end
 
   # users that follow self
   def following_users
     user_ids = $redis.smembers(self.redis_key(:following_users))
-    User.where(:id => user_ids)
+    User.find(user_ids)
   end
   
   # questions that follow self
   def following_questions
     question_ids = $redis.smembers(self.redis_key(:following_questions))
-    Question.where(:id => question_ids)
+    Question.find(question_ids)
   end
   
   # does the user follow self
@@ -105,4 +106,10 @@ class User < ActiveRecord::Base
   def redis_key(str)
     "user:#{self.id}:#{str}"
   end
+  
+  private
+    def create_profile
+      # Profile.create(:user_id => self.id)
+      self.create_profile!
+    end
 end
