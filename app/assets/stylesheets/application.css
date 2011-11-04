@@ -6,6 +6,7 @@
  *= require_self
  *= require Aristo
  *= require questions
+ *= require messages
 */
 
 body{
@@ -14,4 +15,8 @@ body{
 
 html, body{
 /*  background:url(/assets/grid.png) repeat;*/
+}
+
+li a{
+  font-weight:bold;
 }

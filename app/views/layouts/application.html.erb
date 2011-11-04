@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Pixar</title>
+  <title>略晓互动</title>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -10,11 +10,11 @@
   <div class="topbar">
     <div class="fill">
       <div class="container">
-        <a class="brand" href="#">Pixar</a>
+        <a class="brand" href="#">略晓互动</a>
         <ul class="nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#about">Profile</a></li>
-          <li><a href="#/new">New Question</a></li>
+          <li class="active"><a href="#">首页</a></li>
+          <li><a href="#about"><%= current_user.name %></a></li>
+          <li><a href="#/new">提问新问题</a></li>
         </ul>
       </div>
     </div>
@@ -22,5 +22,24 @@
   <div class="container" id="page-layout">
     <%= yield %>
   </div>
+
+		<div id="dlg-send-message" style="display:none;">
+			<div id='message-recipient' class="ui-dialog-box">
+				<span>To:</span>
+			</div>
+			<div id='message-body' class="ui-dialog-box">
+				<span>Message:</span>
+				<textarea></textarea>
+			</div>
+			<div id='send-message-countdown'></div>
+		</div>
 </body>
 </html>
+
+<script type="text/javascript" charset="utf-8">
+	var viewer = {
+		name: "<%= current_user.name %>",
+		token: "<%= current_user.id %>",
+		picture: "/assets/default-profile-photo.png"
+	};
+</script>

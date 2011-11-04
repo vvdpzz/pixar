@@ -1,6 +1,6 @@
 <form id="new-question" name="question">
   <fieldset>
-    <legend>New question</legend>
+    <legend>添 加 问 题</legend>
     <!-- title -->
     <div class="clearfix">
       <label for="title">标题</label>
@@ -14,7 +14,7 @@
       <div class="input">
         <textarea class="xxlarge" rows="10" name="content" id="content" value="<%= content %>"></textarea>
         <span class="help-block">
-          Block of help text to describe the field above if need be.
+			在文本框中完成你对问题的描述
         </span>
       </div>
     </div>
@@ -50,7 +50,7 @@
           </li>
         </ul>
         <span class="help-block">
-          <strong>Note:</strong> Labels surround all the options for much larger click areas and a more usable form.
+          <strong>提示:</strong> 点击上面的选择框输入更多的竞标规则
         </span>
       </div>
     </div>
@@ -87,10 +87,16 @@
         <span>其它: </span>
         <input type="text" class="span2" name="user_reputation" autocomplete="off" id="customized_reputation" value="<%= reputation %>" >
       </div>
+
     </div>
+	<div class="clearfix endDateBox">
+		<span>结束日期:</span>
+		<input type="text" name="end_date" id="date_picker" readonly="readonly"/>
+		<input type="hidden" name="ending_date" value="" id="contest_end">
+	</div>
     <!-- actions -->
-    <div class="actions">
-      <button type="submit" class="btn primary">Create Question</button>&nbsp;<a href="#/index" class="btn">Back</a>
+    <div class="actions actions_bottom">
+      <button type="submit" class="btn primary">提交问题</button>&nbsp;<a href="#/index" class="btn">返回</a>
     </div>
   </fieldset>
 </form>
@@ -98,5 +104,6 @@
 setTimeout(function(){
   new nicEditor({
     buttonList: ['bold','italic','underline', 'strikethrough', 'ol', 'ul', 'hr']
-  }).panelInstance('content')},0);
+  }).panelInstance('content');
+},10);
 </script>

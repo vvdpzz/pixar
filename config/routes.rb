@@ -16,10 +16,23 @@ Pixar::Application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
   
+  # resources :messages do
+  #   collection do
+  #     get "load_conversations"
+  #     post "send_message"
+  #   end
+  # end
+  
   resources :messages do
     collection do
       get "load_conversations"
+      get "load_contact_list"
+      get "messages"
+      get "load_messages"
+      post "remove_conversation"
       post "send_message"
+      get "load_messages_on_navbar"
+      post "update_last_viewed"
     end
   end
 

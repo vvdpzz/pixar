@@ -18,6 +18,6 @@ class User < ActiveRecord::Base
   
   acts_as_voter
   def self.basic(id)
-    User.select("id,name,picture").find_by_id(id)
+    User.select("id,name,avatar").find_by_id(id)
   end
 end
