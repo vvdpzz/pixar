@@ -35,6 +35,13 @@ Pixar::Application.routes.draw do
       post "update_last_viewed"
     end
   end
+  
+  resources :notifications do
+    collection do
+      get "load_notifications"
+      post "set_all_seen"
+    end
+  end
 
   devise_for :users
   resources :users

@@ -1,28 +1,148 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>略晓互动</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+	<title>略晓互动</title>
+	<%= stylesheet_link_tag    "application" %>
+	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="topbar">
-    <div class="fill">
-      <div class="container">
-        <a class="brand" href="#">略晓互动</a>
-        <ul class="nav">
-          <li class="active"><a href="#">首页</a></li>
-          <li><a href="#about">个人主页</a></li>
-          <li><a href="#/new">提问新问题</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="container" id="page-layout">
-    <%= yield %>
-  </div>
+	<div id="container">
+		<div id="page">
+			<div id="top">
+				<div id="header">
+					<div id="header-bg"></div>
+					<div id="header-shadow"></div>
+					<div id="header-content">
+						<div class="header-left">
+							<div id="top-nav">
+								<ul class="nav">
+									<li ><a class="brand" href="#">>略晓互动</a></li>
+									<li class="active"><a href="#">首页</a></li>
+									<li><a href="#about"><%= current_user.name %></a></li>
+									<li><a href="#/new">提问新问题</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="header-right logged-in">
+							<div id="user-info" class="drop-info-menu inactive-menu">
+								<div id="user-drop-links" class="hand-cursor user-drop-icon">
+									<img id="user-image" src="<%= current_user.avatar %>">
+									<span id="user-name"><%= current_user.name %></span>
+								</div>
+								<div id="dropdown-links" class="dropdown-menu">
+									<div class="nav-arrow-border"></div>
+									<div class="nav-arrow"></div>
+									<a id="credit-history-btn" href="/history/credit_history" logdata="button_type=4010&amp;event_type=button_clicked" class="dropdown-menu-item bottom-divider-line">
+										History
+									</a>
+									<a href="/setting" logdata="button_type=4013&amp;event_type=button_clicked" class="dropdown-menu-item bottom-divider-line">
+										Settings
+									</a>
+									<%= link_to "Logout", "/users/sign_out", :id => "logout-btn", :class => "dropdown-menu-item non-bottom-line" %>
+								</div>
+							</div>
+							<span class="vertical-divider"></span>
+							<div id="notifications" class="notifications-menu inactive-menu">
+								<div class="icon-outer">
+									<div id="notification-icon" class="notifications-icon hand-cursor " tip-text="Notifications">
+										<span id="notification-new-num" style="display:none; "></span>
+									</div>
+								</div>
+								<div id="notification-menu" class="notification-content" style="display: none; ">
+									<div class="nav-arrow-border"></div>
+									<div class="nav-arrow"></div>
+									<div class="notification-title">
+										通知
+									</div>
+									<div id="notification-empty" class="notification-item empty non-bottom-line" style="display:none">
+										暂无新通知.
+									</div>
+									<div id="notification-items">
+										<a id="follow" href="" class="notification-item item-inverse" style="display:none">
+											<span class="user-name"></span> 关注了你.
+											<br><span class="notification-timeago"></span>
+										</a>
+										<a id="entry" href="" class="notification-item item-inverse" style="display:none">
+											<span class="user-name"></span> 回答了你的问题 <span id="contest_title"></span>.
+											<br><span class="notification-timeago"></span>
+										</a>
+									</div>
+									<a class="notification-seeall item-inverse display-block" href="/notifications">
+										<span>查看所有通知</span>
+									</a>
+								</div>
+							</div>
+							<span class="vertical-divider"></span>
+							<div id="nav-messages" class="notifications-menu inactive-menu">
+								<div class="icon-outer">
+									<div class="nav-msg-icon hand-cursor" tip-text="Messages">
+										<span id="nav-msg-new-num" style="display: none; "></span>
+									</div>
+								</div>
+								<div id="nav-msg-menu" class="notification-content" style="display: none; ">
+									<div class="nav-arrow-border"></div>
+									<div class="nav-arrow"></div>
+									<div class="notification-title">
+										<span class="notification-title-left">私信</span>
+										<a id="nav-msg-send" class="notification-right-button" href="#">发私信</a>
+									</div>
+									<div id="nav-msg-content">
+										<div id="nav-msg-item-proto" class="notification-item item-inverse" style="display: none">
+											<p class="user-name"></p>
+											<p class="message-preview"></p>
+											<span class="timeago"></span>
+										</div>
+										<div id="nav-msg-empty" class="notification-item empty" style="display:none">
+											暂无新私信.
+										</div>
+									</div>
+									<a class="notification-seeall item-inverse display-block" href="/messages">
+										<span>查看所有私信</span>
+									</a>
+								</div>
+							</div>
+							<span class="vertical-divider"></span>
+							<div id="nav-contests" class="notifications-menu inactive-menu">
+								<div class="icon-outer">
+									<div class="nav-contest-icon hand-cursor" tip-text="Active Contests">
+										<!--<div class="nav-contest-icon hand-cursor " tip-text='Active Contests'>
+										<span id="nav-contest-new-num">0</span>-->
+									</div>
+								</div>
+								<div id="nav-contest-menu" class="notification-content" style="display: none; ">
+									<div class="nav-arrow-border"></div>
+									<div class="nav-arrow"></div>
+									<div class="notification-title">
+										<span id="notification-title" class="notification-title-left">参与问题(0)</span>
+									</div>
+									<div id="nav-contest-content">
+										<div id="nav-cnt-empty" class="notification-item empty" style="display:none">
+											暂无参与问题.
+										</div>
+										<a  id="nav-ntf-item-proto" href="" class="notification-item item-inverse" style="display:none"></a>
+									</div>
+									<a class="notification-seeall item-inverse display-block" href="/contests/active_contests">
+										<span>查看所有参与问题</span>
+									</a>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="top_sub"></div>
+			<div id="page-layout">
+				<div id="page-container" class="clearfix">
+					<%= yield %>
+				</div>
+			</div>
+		</div>
+	</div>		
 
+
+	<div style="position: fixed; top: 0px; z-index: 1010;">
 		<div id="dlg-send-message" style="display:none;">
 			<div id='message-recipient' class="ui-dialog-box">
 				<span>To:</span>
@@ -33,13 +153,36 @@
 			</div>
 			<div id='send-message-countdown'></div>
 		</div>
+		<div id='dlg-ofac' style="display:none;" class="dlg-plain-content">
+			<div class='ofac-notice'>
+				For payment transactions, we're required by law to collect this information from you once.
+			</div>
+			<div class='ofac-row'>
+				<div class='ofac-field' >
+					<span>Order Number:</span>
+					<span id="order-number"></span>
+				</div>
+			</div>
+			<div class='ofac-row'>
+				<div class='ofac-field' id="alipay-form">
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
 
 <script type="text/javascript" charset="utf-8">
-	var viewer = {
-		name: "<%= current_user.name %>",
-		token: "<%= current_user.id %>",
-		picture: "/assets/default-profile-photo.png"
-	};
+var viewer = {
+	name: "<%= current_user.name %>",
+	token: "<%= current_user.id %>",
+	picture: "/assets/default-profile-photo.png"
+};
+$(document).ready(function() {
+	ce6.nav.init();
+	alert($('#dlg-send-message').attr('id'))
+	$('#dlg-send-message').dialog();
+});
+
+var surface = "";
 </script>
