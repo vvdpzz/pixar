@@ -81,8 +81,8 @@ background-color: #ACC3CC;
 
 /* add question part */
 #new-question{
-  margin-left:-70px;
 }
+
 .endDateBox{
 	margin-left:80px;
 }
@@ -113,4 +113,22 @@ width: 152px;
 font-size: 15px;
 background: url(/assets/calendar-icon.png) no-repeat 135px 6px white;
 }
+/*question item show*/
+.question_item{
+  border-top:2px solid #ddd;
+}
+  
+#questions li{
+  text-decoration: none;
+  list-style:none;
+}
+#page-type{
+  width:100%;
+  height:40px;
+  margin-left:40px;
+}
+
+
+
+
 
