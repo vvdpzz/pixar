@@ -14,6 +14,7 @@ gem 'devise'
 # https://github.com/brady8/thumbs_up
 gem 'thumbs_up'
 
+# https://github.com/binarylogic/settingslogic
 gem 'settingslogic'
 
 gem 'uuidtools'

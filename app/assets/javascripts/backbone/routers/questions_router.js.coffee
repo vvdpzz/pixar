@@ -9,6 +9,7 @@ class Pixar.Routers.QuestionsRouter extends Backbone.Router
     "/:id/edit" : "edit"
     "/:id"      : "show"
     ".*"        : "index"
+    "users/:id" : "profile"
 
   newQuestion: ->
     @view = new Pixar.Views.Questions.NewView(collection: @questions)
@@ -31,3 +32,6 @@ class Pixar.Routers.QuestionsRouter extends Backbone.Router
     @view = new Pixar.Views.Questions.EditView(model: question)
     $("#main-content").html(@view.render().el)
   
+  profile: (id) ->
+    @view = new Pixar.Views.Users.ShowView({uid: id})
+    $("#main-content").html(@view.render().el)

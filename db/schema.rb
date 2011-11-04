@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20111102104221) do
+=======
+ActiveRecord::Schema.define(:version => 20111103074411) do
+>>>>>>> 1f785907e3b830fad28c377807c3760572badb61
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -61,6 +65,22 @@ ActiveRecord::Schema.define(:version => 20111102104221) do
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
   add_index "answers", ["user_id"], :name => "index_answers_on_user_id"
 
+<<<<<<< HEAD
+=======
+  create_table "categories", :force => true do |t|
+    t.string   "name",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "category_questions", :force => true do |t|
+    t.integer  "category_id",              :null => false
+    t.integer  "question_id", :limit => 8, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+>>>>>>> 1f785907e3b830fad28c377807c3760572badb61
   create_table "comments", :id => false, :force => true do |t|
     t.integer  "id",         :limit => 8
     t.integer  "user_id",    :limit => 8,                 :null => false

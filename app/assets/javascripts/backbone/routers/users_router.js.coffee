@@ -4,11 +4,7 @@ class Pixar.Routers.UsersRouter extends Backbone.Router
     @users.reset options.users
 
   routes:
-    "/new"      : "newUser"
-    "/index"    : "index"
-    "/:id/edit" : "edit"
     "/:id"      : "show"
-    ".*"        : "index"
 
   newUser: ->
     @view = new Pixar.Views.Users.NewView(collection: @users)
