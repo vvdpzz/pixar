@@ -2,7 +2,7 @@ Pixar.Views.Answers ||= {}
 
 class Pixar.Views.Answers.answerView extends Backbone.View
   template : JST["backbone/templates/answers/answer"]
-  tagName: "li"
+  tagName: "div"
   className: "answer"
   
   initialize: ->
