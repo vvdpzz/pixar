@@ -1,12 +1,11 @@
-
-	<div class="friend-picture">
-		<a href=""><img src="<%= message.owner_picture %>"></a>
+<div class="friend-picture">
+	<a href=""><img src="<%= message.owner_picture %>"></a>
+</div>
+<div class="message-container">
+	<div class="message-info">
+		<a href="<%= message.owner_profile_url %>" class="owner-name"><%= message.owner_name %></a>
+		<!-- <span class="remove-button"></span> -->
+		<span class="message-date"><%= message.time_created %></span>
 	</div>
-	<div class="message-container">
-		<div class="message-info">
-			<a href="<%= message.owner_profile_url %>" class="owner-name"><%= message.owner_name %></a>
-			<!-- <span class="remove-button"></span> -->
-			<span class="message-date"><%= message.time_created %></span>
-		</div>
-		<div class="message-body"><%= message.text %></div>
-	</div>
+	<div class="message-body"><%= message.text %></div>
+</div>

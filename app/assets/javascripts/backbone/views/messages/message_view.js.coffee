@@ -6,12 +6,9 @@ class Pixar.Views.Messages.MessageView extends Backbone.View
   className: "message-entry clearfix"
 
   initialize: ()->
-    _.bindAll(this, 'render', 'set')
+    _.bindAll(this, 'render')
     @model = @options.model
-    
-  set: ->
   
   render: ->
     $(@el).html(@template(message: @options.model.toJSON() ))
-    @set()
     return this

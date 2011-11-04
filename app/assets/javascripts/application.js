@@ -14,7 +14,16 @@
 //= require backbone_datalink
 //= require backbone/pixar
 //= require_tree .
+//= require app
+//= require message
 
 $(function(){
   Pixar.initialize();
+  $.ajaxSetup({
+    beforeSend: function( xhr ) {
+      var token = $('meta[name="csrf-token"]').attr('content');
+      if (token) xhr.setRequestHeader('X-CSRF-Token', token);
+    }
+  });
+  
 })
