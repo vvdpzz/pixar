@@ -25,6 +25,7 @@ class Pixar.Views.Questions.ShowView extends Backbone.View
   load_answers: ->
     answersView = new Pixar.Views.Answers.answersView(collection: @answerCollection)
     $(this.el).append(answersView.render().el)
+    $("#answers:last").class+=""
   
   enterSubmission: ->
     @dialog.dialog('open')

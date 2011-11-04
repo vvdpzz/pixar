@@ -1,8 +1,17 @@
-<td><%= name %></td>
-<td><%= email %></td>
-<td><%= credit %></td>
-<td><%= reputation %></td>
+<div class="follow-feed">
+	<div class="follow-feed-user-image">
+		<img width="50px" height="50px" src="<%= avatar %>" alt="<%= name %>">
+	</div>
+	<div class="follow-feed-name">
+		<a href="/users/<%= id %>"><%= name %></a>
+		<span class="verified"></span>
+		<br>
+		<span class="follower-description"><%= about_me %></span>
+	</div>
+	<div class="follow-button">
 
-<td><a href="#/<%= id %>">Show</td>
-<td><a href="#/<%= id %>/edit">Edit</td>
-<td><a href="#/<%= id %>/destroy" class="destroy">Destroy</a></td>
+		  <button class="unfollow" followed="1" uid="<%= id %>">取消关注</button>
+
+		  <button class="follow" followed="0" uid="<%= id %>">关注</button>
+	</div>
+</div>

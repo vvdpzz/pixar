@@ -1,7 +1,7 @@
 Pixar.Views.Answers ||= {}
 
 class Pixar.Views.Answers.answersView extends Backbone.View
-  tagName: "ul"
+  tagName: "div"
   id: "answers"
 
   initialize: () ->

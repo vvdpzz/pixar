@@ -44,7 +44,7 @@ Pixar::Application.routes.draw do
   end
 
   devise_for :users
-  
+  resources :users
   resources :recharge do
     collection do
       post :notify
