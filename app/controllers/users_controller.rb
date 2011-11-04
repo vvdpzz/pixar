@@ -1,14 +1,7 @@
 class UsersController < ApplicationController
   def show
-    if user = User.select("id,name,avatar, about_me").find_by_id(params[:id], :include => :profile)
-      # follower_users = $redis.scard("users:#{@user.id}.follower_users")
-      # following_users = $redis.scard("users:#{@user.id}.following_users")
-      # following_contests = $redis.scard("users:#{@user.id}.following_contests")
-      # is_myself = (@user.id == current_user.id)
-      
-      render json: {:user => user}
-    else
-      
+    if user = User.select("id,name,avatar, about_me").find_by_id(params[:id])
+      render json: user.as_json(:methods => [:followers_count, :following_users_count, :following_questions_count]).merge(user.profile.as_json)
     end
   end
 end

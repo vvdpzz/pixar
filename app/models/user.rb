@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   before_create :ensure_authentication_token
   after_create :create_profile
-  has_one :profile
+  has_one :profile, :select => [ :description, :website, :location, :created_at]
   has_many :questions
   has_many :answers
   has_many :comments
@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
   def redis_key(str)
     "user:#{self.id}:#{str}"
   end
-  
+
   private
     def create_profile
       # Profile.create(:user_id => self.id)

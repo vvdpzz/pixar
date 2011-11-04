@@ -3,24 +3,38 @@
     <img src="<%= avatar %>">
   </div>
   
-    <div id="image-tab">
-      <a href="" id="edit-img"></a>
-      <a href="" id="delete-img"></a>
-    </div>
-    <div id="relation-button">
-      <button class="follow"></button>
-      <button id="send-msg"></button>
-    </div>
+   <div id="image-tab">
+     <a href="" id="edit-img"></a>
+     <a href="" id="delete-img"></a>
+   </div>
+   <div id="relation-button">
+     <button class="follow"></button>
+     <button id="send-msg"></button>
+   </div>
 </div>
 <div id="profile-middle">
   <div id="profile-userinfo">
-    <div class="profile-entry-line"><%= description %></div>
-    <div class="profile-entry-line"><%= location %></div>
-    <div class="profile-entry-line"><%= website %></div>
-    <div class="profile-entry-line"><%= created_at %></div>
+    <div class="profile-entry-line">
+      <span >description: <%= description %></span>
+    </div>
+    <div class="profile-entry-line">
+      <span >location: <%= location %></span>
+    </div>
+    <div class="profile-entry-line">
+      <span>website: <%= website %></span>      
+    </div>
+    <div class="profile-entry-line">
+      <span>created_at: <%= created_at %></span>
+    </div>
   </div>
 </div>
 <div id="profile-right">
   <div id="profile-status">
+    <ul>
+      <li>followers: <%= followers_count %></li>
+      <li>following uers: <%= following_users_count %></li>
+      <li>following questions: <%= following_questions_count %></li>
+    </ul>
+    
   </div>
 </div>
