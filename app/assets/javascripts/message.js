@@ -1,4 +1,4 @@
-var ce6 = ce6 || {};
+var ce6 = ce6 || {};var pixar = pixar || {};
 ce6.message = (function() {
 	var self = {};
 	// PRIVATE METHODS AND VARIABLES
@@ -47,7 +47,7 @@ ce6.message = (function() {
 		},
 		init : function() {
 			this.initialized = true;
-			$('#dlg-send-message').dialog();
+			$('#dlg-send-message').dialog(this).restyleButtons();
 			$('#message-body textarea')
 				.bind('keyup', updateSendMessageCountdown)
 				.bind('blur', updateSendMessageCountdown)

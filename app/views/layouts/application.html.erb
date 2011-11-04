@@ -17,10 +17,10 @@
 						<div class="header-left">
 							<div id="top-nav">
 								<ul class="nav">
-									<li ><a class="brand" href="#">>略晓互动</a></li>
-									<li class="active"><a href="#">首页</a></li>
-									<li><a href="#about"><%= current_user.name %></a></li>
-									<li><a href="#/new">提问新问题</a></li>
+									<li ><a class="brand" href="/#">略晓互动</a></li>
+									<li class="active"><a href="/#">首页</a></li>
+									<li><a href="/#about"><%= current_user.name %></a></li>
+									<li><a href="/#/new">提问新问题</a></li>
 								</ul>
 							</div>
 						</div>
@@ -173,16 +173,14 @@
 </html>
 
 <script type="text/javascript" charset="utf-8">
-var viewer = {
-	name: "<%= current_user.name %>",
-	token: "<%= current_user.id %>",
-	picture: "/assets/default-profile-photo.png"
-};
-$(document).ready(function() {
-	ce6.nav.init();
-	alert($('#dlg-send-message').attr('id'))
-	$('#dlg-send-message').dialog();
-});
+	var viewer = {
+		name: "<%= current_user.name %>",
+		token: "<%= current_user.id %>",
+		picture: "/assets/default-profile-photo.png"
+	};
+	$(document).ready(function() {
+		ce6.nav.init();
+	});
 
-var surface = "";
+	var surface = "";
 </script>
