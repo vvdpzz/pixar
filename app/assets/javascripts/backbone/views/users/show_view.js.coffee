@@ -5,8 +5,12 @@ class Pixar.Views.Users.ShowView extends Backbone.View
   
   initialize: (a) ->
     @user ||= new Pixar.Models.User({}, {uid: a.uid})
-    
   
   render: ->
-    $(this.el).html(@template(@model.toJSON() ))
+    if @user.id
+      $(this.el).html(@template(@user.toJSON()))
+    else
+      @user.fetch
+        success: (user) ->
+          $(this.el).html(@template(user))
     return this

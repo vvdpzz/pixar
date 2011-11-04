@@ -10,4 +10,25 @@ class Question < ActiveRecord::Base
   default_scope order("created_at DESC")
 
   acts_as_voteable
+  
+  # users that self follows
+  def followers
+    user_ids = $redis.smembers(self.redis_key(:followers))
+    User.where(:id => user_ids)
+  end
+  
+  # number of followers
+  def followers_count
+    $redis.scard(self.redis_key(:followers))
+  end
+  
+  # does the user follow self
+  def followed_by?(user)
+    $redis.sismember(self.redis_key(:followers), user.id)
+  end
+  
+  # helper method to generate redis keys
+  def redis_key(str)
+    "question:#{self.id}:#{str}"
+  end
 end

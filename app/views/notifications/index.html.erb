@@ -1,0 +1,40 @@
+<div id="page-container" class="clearfix">
+	<div class="page-left">
+		<span class="page-left-header">
+			<span class="ui-icons ui-icons-position" id="all-notification-icon"></span>
+			<span class="ui-icons-title">所有通知</span>
+		</span>
+		
+		<div class="notification-feed">
+		<% if @first["date"] == Time.now.strftime("%Y-%m-%d") %>
+			<div class="notification-date">Today</div>
+		<% else%>
+			<div class="notification-date"><%= @first["date"] %></div>
+		<% end %>
+		<% @notification_list.each do |notification| %>
+			<% if notification["date"] != @first["date"] %>
+				</div>
+				<div class="notification-feed">
+				<div class="notification-date"><%= notification["date"] %></div>
+				<% @first = notification %>
+			<% end %>
+			
+			<% if notification["type"] == 'follow' %> 
+				<div class="notification-detail"> 
+					<a href="/users/<%= notification["user_id"] %>" class="clickable-user"><%= notification["username"] %></a> 关注了你。 <span class="timeago"><%= notification["created_at"] %></span></div>
+			<% elsif notification["type"] == 'entry' %>
+				<div class="notification-detail"> 
+					<a href="/users/<%= notification["user_id"] %>" class="clickable-user"><%= notification["username"] %></a> 回答了你的问题 <a href="<%= notification["contest_id"] %>" class="clickable-contest">"<%= notification["contest_title"] %>"</a>. <span class="timeago"><%= notification["created_at"] %></span></div>
+			<% end %>
+		<% end %>
+		</div>
+	</div>
+	<div class="page-right"></div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+	var surface = "notification"
+</script>
+	
+	
+	

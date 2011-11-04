@@ -47,7 +47,7 @@ ce6.message = (function() {
 		},
 		init : function() {
 			this.initialized = true;
-			$('#dlg-send-message').dialog(this).restyleButtons();
+			$('#dlg-send-message').dialog();
 			$('#message-body textarea')
 				.bind('keyup', updateSendMessageCountdown)
 				.bind('blur', updateSendMessageCountdown)
@@ -468,7 +468,6 @@ ce6.message = (function() {
 			loadUserConnectionList(user);
 		}
 		if (!sendMessageDialog.initialized) {
-		  alert('');
 			sendMessageDialog.init();
 		}
 		$('#dlg-send-message').dialog('open');
