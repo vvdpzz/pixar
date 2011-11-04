@@ -6,6 +6,7 @@
  *= require_self
  *= require Aristo
  *= require questions
+ *= require messages
 */
 
 body{

@@ -10,20 +10,13 @@ class MessagesController < ApplicationController
   
   def load_conversations
     conversation_list = $redis.zrange("messages:#{current_user.id}", 0, -1)
-    data = []
+    last_conver_msg_list = []
     conversation_list.each do |conver_id|
-      hash = load_conversation(conver_id)
-      hash[:messages] = load_messages(conver_id)
-      data << hash
-    end
-    render :json => data
-  end
-  
-  def load_conversation(conver_id)
       key = "messages:#{current_user.id}:#{conver_id}"
       last_message = MultiJson.decode($redis.lrange(key, -1, -1)[0])
       hash = {}
-      hash[:unread_message_count] = $redis.get(key + ":unreadcount")
+      unread_count = $redis.get(key + ":unreadcount")
+      hash[:unread_message_count] = unread_count
       if current_user.id.to_s == last_message["sender_id"]
         hash[:last_message_is_outgoing] = true
       else
@@ -38,9 +31,44 @@ class MessagesController < ApplicationController
       hash[:friend_token]   = conver_id
       hash[:friend_picture] = "/assets/default-profile-photo.png"
       hash[:last_update]    = time_ago_in_words(Time.parse last_message["created_at"]) + " ago"
-      
-      return hash
+      last_conver_msg_list  << hash
+    end
+    render :json => { :conversations => last_conver_msg_list, :rc => 0 }
   end
+  
+  # def load_conversations
+  #     conversation_list = $redis.zrange("messages:#{current_user.id}", 0, -1)
+  #     data = []
+  #     conversation_list.each do |conver_id|
+  #       hash = load_conversation(conver_id)
+  #       hash[:messages] = load_messages(conver_id)
+  #       data << hash
+  #     end
+  #     render :json => data
+  #   end
+  
+  # def load_conversation(conver_id)
+  #       key = "messages:#{current_user.id}:#{conver_id}"
+  #       last_message = MultiJson.decode($redis.lrange(key, -1, -1)[0])
+  #       hash = {}
+  #       hash[:unread_message_count] = $redis.get(key + ":unreadcount")
+  #       if current_user.id.to_s == last_message["sender_id"]
+  #         hash[:last_message_is_outgoing] = true
+  #       else
+  #         hash[:last_message_is_outgoing] = false
+  #       end
+  #       hash[:last_message]   = last_message["text"]
+  #       if conver_id == last_message["sender_id"]
+  #         hash[:friend_name]    = last_message["sender_name"]
+  #       else
+  #         hash[:friend_name]    = last_message["receiver_name"]
+  #       end
+  #       hash[:friend_token]   = conver_id
+  #       hash[:friend_picture] = "/assets/default-profile-photo.png"
+  #       hash[:last_update]    = time_ago_in_words(Time.parse last_message["created_at"]) + " ago"
+  #       
+  #       return hash
+  #   end
   
   def remove_conversation
     friend_id = params[:friend_token]
@@ -51,10 +79,11 @@ class MessagesController < ApplicationController
   end
   
   def messages
-    @friend = User.select("username").find_by_id params[:friend_token]
+    @friend = User.select("name").find_by_id params[:friend_token]
   end
   
-  def load_messages(friend_id)
+  def load_messages
+    friend_id = params[:friend_token]
     message_list = []
     message_list_redis = $redis.lrange("messages:#{current_user.id}:#{friend_id}", 0, -1)
     message_list_redis.each do |message_redis|
@@ -67,9 +96,26 @@ class MessagesController < ApplicationController
       message[:owner_name]        = message_redis_hash["sender_name"]
       message_list << message
     end
-    return message_list
-    
+    $redis.set("messages:#{current_user.id}:#{friend_id}:unreadcount", 0)
+    render :json => { :messages => message_list, :rc => 0 }
   end
+  
+  # def load_messages(friend_id)
+  #     message_list = []
+  #     message_list_redis = $redis.lrange("messages:#{current_user.id}:#{friend_id}", 0, -1)
+  #     message_list_redis.each do |message_redis|
+  #       message_redis_hash = MultiJson.decode(message_redis)
+  #       message = {}
+  #       message[:owner_picture]     = "/assets/default-profile-photo.png"
+  #       message[:text]              = message_redis_hash["text"]
+  #       message[:owner_profile_url] = ""
+  #       message[:time_created]      = time_ago_in_words(Time.parse message_redis_hash["created_at"]) + " ago"
+  #       message[:owner_name]        = message_redis_hash["sender_name"]
+  #       message_list << message
+  #     end
+  #     return message_list
+    
+  # end
   
   def set_unreadcount
     friend_id = params[:friend_token]
@@ -89,10 +135,10 @@ class MessagesController < ApplicationController
     
     # add to user's unread message list
     $redis.rpush("messages:#{receiver.id}:unread_messages", MultiJson.encode(hash))
-    Pusher["presence-messages_#{receiver.id}"].trigger('message_created', MultiJson.encode(hash))
+    # Pusher["presence-messages_#{receiver.id}"].trigger('message_created', MultiJson.encode(hash))
     
     hash[:receiver_id]    = receiver.id.to_s
-    hash[:receiver_name]  = receiver.username
+    hash[:receiver_name]  = receiver.name
     
     sender_conver_timecount    = $redis.incr("messages:#{sender.id}:count")
     receiver_conver_timecount  = $redis.incr("messages:#{receiver.id}:count")
@@ -108,7 +154,7 @@ class MessagesController < ApplicationController
     # incr user'a all unread message count
     $redis.incr("messages:#{receiver.id}:unreadcount")
     
-    render :json => { :outgoing => "", :rc => 0 }    
+    render :json => { :outgoing => "", :rc => 0 }   
   end
   
   def remove_message
