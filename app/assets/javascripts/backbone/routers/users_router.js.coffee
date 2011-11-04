@@ -16,7 +16,6 @@ class Pixar.Routers.UsersRouter extends Backbone.Router
 
   show: (id) ->
     user = @users.get(id)
-    
     @view = new Pixar.Views.Users.ShowView(model: user)
     $("#users").html(@view.render().el)
     

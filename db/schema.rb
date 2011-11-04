@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20111102104221) do
-=======
-ActiveRecord::Schema.define(:version => 20111103074411) do
->>>>>>> 1f785907e3b830fad28c377807c3760572badb61
+ActiveRecord::Schema.define(:version => 20111104034642) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -65,8 +61,6 @@ ActiveRecord::Schema.define(:version => 20111103074411) do
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
   add_index "answers", ["user_id"], :name => "index_answers_on_user_id"
 
-<<<<<<< HEAD
-=======
   create_table "categories", :force => true do |t|
     t.string   "name",       :null => false
     t.datetime "created_at"
@@ -80,7 +74,6 @@ ActiveRecord::Schema.define(:version => 20111103074411) do
     t.datetime "updated_at"
   end
 
->>>>>>> 1f785907e3b830fad28c377807c3760572badb61
   create_table "comments", :id => false, :force => true do |t|
     t.integer  "id",         :limit => 8
     t.integer  "user_id",    :limit => 8,                 :null => false
@@ -93,6 +86,19 @@ ActiveRecord::Schema.define(:version => 20111103074411) do
 
   add_index "comments", ["pixar_id"], :name => "index_comments_on_pixar_id"
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+
+  create_table "profiles", :id => false, :force => true do |t|
+    t.integer  "id",           :limit => 8
+    t.integer  "user_id",      :limit => 8, :null => false
+    t.string   "description"
+    t.string   "location"
+    t.text     "introduction"
+    t.string   "website"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"
 
   create_table "questions", :id => false, :force => true do |t|
     t.integer  "id",              :limit => 8
