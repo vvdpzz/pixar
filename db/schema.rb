@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111103074411) do
+ActiveRecord::Schema.define(:version => 20111104021009) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -119,6 +119,19 @@ ActiveRecord::Schema.define(:version => 20111103074411) do
   end
 
   add_index "recharge_records", ["user_id"], :name => "index_recharge_records_on_user_id"
+
+  create_table "tag_questions", :force => true do |t|
+    t.integer  "tag_id",                   :null => false
+    t.integer  "question_id", :limit => 8, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string   "name",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :primary_key => "email", :force => true do |t|
     t.integer  "id",                     :limit => 8

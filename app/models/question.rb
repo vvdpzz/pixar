@@ -5,6 +5,7 @@ class Question < ActiveRecord::Base
   belongs_to :category, :counter_cache => true
   
   has_many :answers, :dependent => :destroy
+  has_and_belongs_to_many :tags
   has_many :comments, :class_name => "Comment", :foreign_key => "pixar_id", :dependent => :destroy
   
   default_scope order("created_at DESC")

@@ -159,12 +159,33 @@ class QuestionsController < ApplicationController
     end
   end
   
+  # PUT /questions/:id/tag_add/:tag_name
   def tag_add
-  
+    tag_id = Tag.find params[:tag_name]
+    question_id = params[:id]
+    strong_inert = ActiveRecord::Base.connection.execute("INSERT INTO tag_questions SET tag_id=#{tag_id},question_id=#{question_id}")
+    respond_to do |format|
+      #if category_question.save
+      if strong_inert
+        format.json { head :ok }
+      else
+        format.json { render json: strong_inert.errors, status: :unprocessable_entity }
+      end
+    end
   end
   
+  # PUT /questions/:id/tag_del/:tag_name
   def tag_del
-    
+    tag_id = Tag.find params[:tag_name]
+    question_id   = params[:id]
+    strong_delete  = ActiveRecord::Base.connection.execute("DELETE category_questions WHERE tag_id=#{tag_id} and question_id=#{question_id}")
+    respond_to do |format|
+      if strong_inert
+        format.json { head :ok }
+      else
+        format.json { render json: strong_delete.errors, status: :unprocessable_entity }
+      end
+    end
   end
   
   protected
