@@ -92,7 +92,7 @@ class QuestionsController < ApplicationController
   end
   
   def answers
-    question = Question.find params[:question_id]
+    question = Question.find params[:id]
     render json: question.answers.collect{|answer| answer.as_json}, status: :ok
   end
   
