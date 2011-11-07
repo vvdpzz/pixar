@@ -6,25 +6,4 @@
 //
 //= require jquery
 //= require jquery-ui
-//= require underscore
-//= require utils
-//= require backbone
-//= require backbone_rails_sync
-//= require backbone_datalink
-//= require backbone/pixar
 //= require_tree .
-//= require app
-//= require selector
-//= require nav
-//= require message
-
-$(function(){
-  Pixar.initialize();
-  $.ajaxSetup({
-    beforeSend: function( xhr ) {
-      var token = $('meta[name="csrf-token"]').attr('content');
-      if (token) xhr.setRequestHeader('X-CSRF-Token', token);
-    }
-  });
-  
-})
