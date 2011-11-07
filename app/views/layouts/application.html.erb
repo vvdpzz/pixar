@@ -11,15 +11,25 @@
     <div class="fill">
       <div class="container">
         <a class="brand" href="#">Pixar</a>
-        <ul class="nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#about">Profile</a></li>
-          <li><a href="#/new">New Question</a></li>
-        </ul>
+		<div id="nav" class="header_right">
+	        <ul class="nav">
+	          <li id="nav_home" class="active"><a href="#">Home</a></li>
+	          <li id="nav_about"><a href="#about">Profile</a></li>
+	          <li id="nav_new"><a href="#/new">New Question</a></li>
+	        </ul>			
+		</div>
+		<div class="header_left">
+			<ul class="nav">
+				<li id="user_credit">积分</li>
+				<li id="user_money">金钱</li>
+				<li id="user_msg">私信</li>
+				<li id="user_info">信息</li>
+			</ul>
+		</div>
       </div>
     </div>
   </div>
-  <div class="container">
+  <div id="containter" class="container">
     <%= yield %>
   </div>
 </body>
