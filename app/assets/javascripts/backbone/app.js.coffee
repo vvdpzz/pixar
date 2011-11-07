@@ -8,7 +8,7 @@
 window.App =
   Models: {}
   Collections: {}
-  Routers: {}  
+  Routers: {}
   Views: {}
 
   initialize: ->
