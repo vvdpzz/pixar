@@ -1,9 +1,12 @@
 Pixar::Application.routes.draw do
+  #match '/questions/:id/category_add/:category_name' 'questions#category_add'
+  
   resources :questions do
     member do
       get :answers
       put :vote_for
       put :vote_against
+      post :category
     end
   end
   
@@ -13,8 +16,36 @@ Pixar::Application.routes.draw do
   
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
-  devise_for :users
   
+  # resources :messages do
+  #   collection do
+  #     get "load_conversations"
+  #     post "send_message"
+  #   end
+  # end
+  
+  resources :messages do
+    collection do
+      get "load_conversations"
+      get "load_contact_list"
+      get "messages"
+      get "load_messages"
+      post "remove_conversation"
+      post "send_message"
+      get "load_messages_on_navbar"
+      post "update_last_viewed"
+    end
+  end
+  
+  resources :notifications do
+    collection do
+      get "load_notifications"
+      post "set_all_seen"
+    end
+  end
+
+  devise_for :users
+  resources :users
   resources :recharge do
     collection do
       post :notify
