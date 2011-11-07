@@ -1,11 +1,14 @@
 Pixar::Application.routes.draw do
-  #match '/questions/:id/category_add/:category_name' 'questions#category_add'
   
   resources :questions do
     member do
       get :answers
       put :vote_for
       put :vote_against
+      post :category_add
+      post :category_del
+      post :tag_add
+      post :tag_del
     end
   end
   

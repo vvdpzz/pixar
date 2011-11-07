@@ -128,9 +128,10 @@ class QuestionsController < ApplicationController
     end
   end
   
-  # PUT /questions/:id/category_add/:category_name
+  # POST /questions/:id/category_add/:category_name
   def category_add
-      category_id = Category.find params[:category_name]
+      category = Category.find params[:category_name]
+      category_id = category.id
       question_id = params[:id]
       strong_insert = ActiveRecord::Base.connection.execute("INSERT INTO category_questions (category_id,question_id) VALUES (#{category_id},#{question_id}")
 #      category_question = CategoryQuestion.new (:category_id=>category_id,:question_id=>question_id)
@@ -145,9 +146,10 @@ class QuestionsController < ApplicationController
       end
   end
   
-  # PUT /questions/:id/category_del/:category_name
+  # POST /questions/:id/category_del/:category_name
   def category_del
-    category_id   = Category.find params[:category_name]
+    category = Category.find params[:category_name]
+    category_id = category.id
     question_id   = params[:id]
     strong_delete  = ActiveRecord::Base.connection.execute("DELETE category_questions WHERE category_id=#{category_id} and question_id=#{question_id}")
     respond_to do |format|
@@ -159,9 +161,10 @@ class QuestionsController < ApplicationController
     end
   end
   
-  # PUT /questions/:id/tag_add/:tag_name
+  # POST /questions/:id/tag_add/:tag_name
   def tag_add
-    tag_id = Tag.find params[:tag_name]
+    tag = Tag.find params[:tag_name]
+    tag_id = tag.id
     question_id = params[:id]
     if tag_id
       strong_insert = ActiveRecord::Base.connection.execute("INSERT INTO tag_questions (tag_id,question_id) VALUES (#{tag_id},#{question_id})")
@@ -183,9 +186,10 @@ class QuestionsController < ApplicationController
     end
   end
   
-  # PUT /questions/:id/tag_del/:tag_name
+  # POST /questions/:id/tag_del/:tag_name
   def tag_del
-    tag_id = Tag.find params[:tag_name]
+    tag = Tag.find params[:tag_name]
+    tag_id = tag.id
     question_id   = params[:id]
     strong_delete  = ActiveRecord::Base.connection.execute("DELETE category_questions WHERE tag_id=#{tag_id} and question_id=#{question_id}")
     respond_to do |format|
