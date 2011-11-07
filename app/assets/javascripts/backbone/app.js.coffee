@@ -13,4 +13,3 @@ window.App =
 
   initialize: ->
     new App.Routers.Pixar
-    Backbone.history.start()
