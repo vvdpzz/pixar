@@ -5,8 +5,8 @@
 // the compiled file.
 //
 //= require jquery
-//= require jquery_ujs
 //= require jquery-ui
+//= require jquery_ujs
 //= require underscore
 //= require utils
 //= require backbone
@@ -15,6 +15,8 @@
 //= require backbone/pixar
 //= require_tree .
 //= require app
+//= require selector
+//= require nav
 //= require message
 
 $(function(){

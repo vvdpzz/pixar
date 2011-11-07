@@ -1,4 +1,4 @@
-var ce6 = ce6 || {};
+var ce6 = ce6 || {};var pixar = pixar || {};
 ce6.message = (function() {
 	var self = {};
 	// PRIVATE METHODS AND VARIABLES
@@ -468,7 +468,6 @@ ce6.message = (function() {
 			loadUserConnectionList(user);
 		}
 		if (!sendMessageDialog.initialized) {
-		  alert('');
 			sendMessageDialog.init();
 		}
 		$('#dlg-send-message').dialog('open');

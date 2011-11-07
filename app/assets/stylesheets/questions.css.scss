@@ -82,7 +82,12 @@ background-color: #ACC3CC;
 /* add question part */
 #new-question{
 }
-
+.new_input{
+  margin-left:100px !important;
+}
+.new_title{
+  margin-left:-50px;
+}
 .endDateBox{
 	margin-left:80px;
 }
@@ -124,11 +129,91 @@ background: url(/assets/calendar-icon.png) no-repeat 135px 6px white;
 }
 #page-type{
   width:100%;
-  height:40px;
+  height:20px;
   margin-left:40px;
 }
 
 
 
 
+/*quesiotn_info*/
+.quesiotn_info{
+    width:100%;
+    padding-left:50px;
+    padding-right:50px;
+}
 
+#quesiotn_info_title{
+  padding:5px;
+  border-bottom:2px solid #ddd;
+  width:100%;
+}
+#quesiotn_info_title span{
+  width: 500px;
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 32px;
+  word-wrap: break-word;
+}
+#quesiotn_info_credit{
+  float:left;
+  margin:5px;
+  width:60px;
+  height:50px;
+}
+#quesiotn_info_credit span{
+  font-size:15px;
+  font-weight: bold;
+}  
+.question_info_detail{
+  width: 620px;
+  line-height: 20px;
+  margin: 15px 0 0 15px ;
+  padding: 0 9px 10px;
+}
+.credit_info{
+  width:43px;
+  height:20px;
+  text-align: center;
+  padding:0px;
+  margin:0 0 0 -6px;
+}
+.answer_item{
+  margin-top:10px;
+  padding:10px 10px 10px 10px;
+}
+.answer_item .updateTime{
+  color:#000;
+  margin-left:70%;
+  
+}
+.answer_info{
+  margin:5%;
+  padding:10px;
+  width:90%;
+  min-height:5px;
+  overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
