@@ -132,12 +132,12 @@ class QuestionsController < ApplicationController
   def category_add
       category_id = Category.find params[:category_name]
       question_id = params[:id]
-      strong_inert = ActiveRecord::Base.connection.execute("INSERT INTO category_questions SET category_id=#{category_id},question_id=#{question_id}")
+      strong_insert = ActiveRecord::Base.connection.execute("INSERT INTO category_questions (category_id,question_id) VALUES (#{category_id},#{question_id}")
 #      category_question = CategoryQuestion.new (:category_id=>category_id,:question_id=>question_id)
 #      category_question = CategoryQuestion.new ( :category_id=>1, :question_id=>2932718821909611 )
       respond_to do |format|
         #if category_question.save
-        if strong_inert
+        if strong_insert
           format.json { head :ok }
         else
           format.json { render json: strong_inert.errors, status: :unprocessable_entity }
@@ -151,7 +151,7 @@ class QuestionsController < ApplicationController
     question_id   = params[:id]
     strong_delete  = ActiveRecord::Base.connection.execute("DELETE category_questions WHERE category_id=#{category_id} and question_id=#{question_id}")
     respond_to do |format|
-      if strong_inert
+      if strong_delete
         format.json { head :ok }
       else
         format.json { render json: strong_delete.errors, status: :unprocessable_entity }
@@ -163,13 +163,22 @@ class QuestionsController < ApplicationController
   def tag_add
     tag_id = Tag.find params[:tag_name]
     question_id = params[:id]
-    strong_inert = ActiveRecord::Base.connection.execute("INSERT INTO tag_questions SET tag_id=#{tag_id},question_id=#{question_id}")
+    if tag_id
+      strong_insert = ActiveRecord::Base.connection.execute("INSERT INTO tag_questions (tag_id,question_id) VALUES (#{tag_id},#{question_id})")
+    else
+      tag_name = params[:tag_name]
+      strong_insert_tag = ActiveRecord::Base.connection.execute("INSERT INTO tags (name) VALUES (#{tag_name})")
+      strong_insert = ActiveRecord::Base.connection.execute("INSERT INTO tag_questions (tag_id,question_id) VALUES (#{tag_id},#{question_id})")
+    end
     respond_to do |format|
-      #if category_question.save
-      if strong_inert
-        format.json { head :ok }
+      if strong_insert_tag
+        if strong_insert
+          format.json { head :ok }
+        else
+          format.json { render json: strong_inert.errors, status: :unprocessable_entity }
+        end
       else
-        format.json { render json: strong_inert.errors, status: :unprocessable_entity }
+        format.json { render json: strong_insert_tag.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -180,7 +189,7 @@ class QuestionsController < ApplicationController
     question_id   = params[:id]
     strong_delete  = ActiveRecord::Base.connection.execute("DELETE category_questions WHERE tag_id=#{tag_id} and question_id=#{question_id}")
     respond_to do |format|
-      if strong_inert
+      if strong_delete
         format.json { head :ok }
       else
         format.json { render json: strong_delete.errors, status: :unprocessable_entity }
