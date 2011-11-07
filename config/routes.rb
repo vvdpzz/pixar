@@ -10,20 +10,22 @@ Pixar::Application.routes.draw do
     end
   end
   
+  resources :autosave, :only => [] do
+    collection do
+      post :save_question
+      post :discard_question
+      post :save_answer
+      post :discard_answer
+    end
+  end
+  
   resources :answers, :only => [:create]
   
   resources :comments, :only => [:create]
   
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
-  
-  # resources :messages do
-  #   collection do
-  #     get "load_conversations"
-  #     post "send_message"
-  #   end
-  # end
-  
+    
   resources :messages do
     collection do
       get "load_conversations"
