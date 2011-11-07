@@ -8,6 +8,15 @@ Category.create(
   ]
 )
 
+Tag.create(
+  [
+    {name: 'Ruby'},
+    {name: 'iOS'},
+    {name: 'ActiveRecord'}
+  ]
+)
+
+
 User.create(
   [
     {
