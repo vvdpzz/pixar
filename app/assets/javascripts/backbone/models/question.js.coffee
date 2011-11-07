@@ -1,3 +1,7 @@
 class App.Models.Question extends Backbone.Model
+  paramRoot: 'question'
   url: ->
-     "/questions/#{@.id}"
+    if @isNew() 
+      "/questions"
+    else
+      "/questions/#{@id}"

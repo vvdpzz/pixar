@@ -8,7 +8,7 @@ class App.Views.New extends Backbone.View
   
   constructor: (options) ->
     super(options)
-    @model = new App.Models.Question
+    @model = new App.Models.Question()
 
     @model.bind("change:errors", () =>
       this.render()
@@ -22,23 +22,20 @@ class App.Views.New extends Backbone.View
 		
     allCheckedRules = @$('#new-question').find('input[type=checkbox]:checked')
     checkedList = (parseInt($(e).attr('id').slice(6),10) for e in allCheckedRules)
-    check = @model.check(checkedList,$("#title"),@$('#new-question').find('.nicEdit-main'));
-    if check is true
-      false
-    else
-      @model.set({
-        title: @$("#title").val(),
-        content: @$('#new-question').find('.nicEdit-main').html(),
-        rules_list: checkedList.join(','),
-        end_date: @$("#date_picker").val()
-      })
-      @collection.create(@model.toJSON(), 
-        success: (question) =>
-          @model = question
-          window.location.hash = "/#{@model.id}"
-        error: (question, jqXHR) =>
-          @model.set({errors: $.parseJSON(jqXHR.responseText)})
-      )
+ 
+    @model.set({
+      title: @$("#title").val(),
+      content: @$('#new-question').find('.nicEdit-main').html(),
+      rules_list: checkedList.join(','),
+      end_date: @$("#date_picker").val()
+    })
+    @model.save(
+      success: (question) =>
+        @model = question
+        window.location.hash = "/#{@model.id}"
+      error: (question, jqXHR) =>
+        @model.set({errors: $.parseJSON(jqXHR.responseText)})
+    )
     
   render: ->
     $(this.el).html(@template(@model.toJSON() ))

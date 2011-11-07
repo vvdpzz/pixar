@@ -1,0 +1,13 @@
+<div id="conversation-box-proto" class="conversation-box">
+	<div class="conversation-friend-picture">
+		<img src="<%= conversation.friend_picture %>">
+	</div>
+	<div class="conversation-info">
+		<span class="friend-name"><%= conversation.friend_name %></span>
+		<p class="message-preview"><%= conversation.last_message %></p>
+	</div>
+	<div class="conversation-last-update">
+		<span class="conversation-date"><%= conversation.last_update %></span>
+		<span class="remove-button"></span>
+	</div>
+</div>

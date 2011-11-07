@@ -12,4 +12,22 @@
 body{
   padding-top: 60px;
 }
-
+.header_left .nav{
+  float:right;
+  color:#ddd;
+}
+.header_left .nav li{
+  padding:2px;
+  margin-left:10px;
+  cursor:pointer;
+  min-width:55px;
+}
+.header_left .nav li:hover{
+  background-color:#363636;
+}
+.header_left .nav li a:hover;{
+  color:#fff;
+}
+.dropdown-menu a{
+  color:#fff;
+}
