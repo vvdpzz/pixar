@@ -11,3 +11,7 @@
 //= require backbone_rails_sync
 //= require backbone/app
 //= require_tree .
+
+$(function(){
+  App.initialize();
+})
