@@ -1,0 +1,109 @@
+<form id="new-question" name="question">
+  <fieldset>
+    <legend>添 加 问 题</legend>
+    <!-- title -->
+    <div class="clearfix new_title">
+      <label for="title">标题</label>
+      <div class="input">
+        <input class="xxlarge" size="30" type="text" name="title" id="title" value="<%= title %>" >
+      </div>
+    </div>
+    <!-- content -->
+    <div class="clearfix">
+      <label for="content"></label>
+      <div class="input new_input">
+        <textarea class="xxlarge" rows="10" name="content" id="content" value="<%= content %>"></textarea>
+        <span class="help-block">
+			在文本框中完成你对问题的描述
+        </span>
+      </div>
+    </div>
+    <!-- rules_list -->
+    <div class="clearfix">
+      <label id="rules_list">竞标规则</label>
+      <div class="input">
+        <ul class="inputs-list">
+          <li>
+            <label>
+              <input type="checkbox" name="rules_list" id="rules_1">
+              <span>相似答案，先答为胜</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="rules_list" id="rules_2">
+              <span>答案需要包含图片</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="rules_list" id="rules_3">
+              <span>答案不能少于200字</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="rules_list" id="rules_0">
+              <span>额外的规则</span>
+            </label>
+            <textarea id="additional_rule" name="customized_rule" class="xxlarge" row=3></textarea>
+          </li>
+        </ul>
+        <span class="help-block">
+          <strong>提示:</strong> 点击上面的选择框输入更多的竞标规则
+        </span>
+      </div>
+    </div>
+    <!-- credit -->
+    <div class="clearfix">
+      <label for="default_credit">赏金</label>
+      <div class="input">
+          <input type="radio" checked="checked" name="credit" value="1" id="default_credit">
+          <span class="credit_value">¥ 1.0</span>
+          <input type="radio" name="credit" value="2">
+          <span class="credit_value">¥ 2.0</span>
+          <input type="radio" name="credit" value="5">
+          <span class="credit_value">¥ 5.0</span>
+          <input type="radio" name="credit" value="10">
+          <span class="credit_value">¥ 10.0</span>
+          <input type="radio" name="credit" id="radio_customized_credit">
+          <span>其它: ¥</span>
+          <input type="text" class="span2" name="user_credit" autocomplete="off" id="customized_credit">
+      </div>
+    </div>
+    <!-- reputation -->
+    <div class="clearfix">
+      <label for="reputation">积分</label>
+      <div class="input">
+        <input type="radio" checked="checked" name="reputation" value="0" id="default_reputation">
+        <span class="reputation_value">0 分</span>
+        <input type="radio" name="reputation" value="5">
+        <span class="reputation_value">5 分</span>
+        <input type="radio" name="reputation" value="10">
+        <span class="reputation_value">10 分</span>
+        <input type="radio" name="reputation" value="20">
+        <span class="reputation_value">20 分</span>
+        <input type="radio" name="reputation" id="radio_customized_reputation">
+        <span>其它: </span>
+        <input type="text" class="span2" name="user_reputation" autocomplete="off" id="customized_reputation" value="<%= reputation %>" >
+      </div>
+
+    </div>
+	<div class="clearfix endDateBox">
+		<span>结束日期:</span>
+		<input type="text" name="end_date" id="date_picker" readonly="readonly"/>
+		<input type="hidden" name="ending_date" value="" id="contest_end">
+	</div>
+    <!-- actions -->
+    <div class="actions actions_bottom">
+      <button type="submit" class="btn primary">提交问题</button>&nbsp;<a href="#/index" class="btn">返回</a>
+    </div>
+  </fieldset>
+</form>
+<script type="text/javascript" charset="utf-8">
+setTimeout(function(){
+  new nicEditor({
+    buttonList: ['bold','italic','underline', 'strikethrough', 'ol', 'ul', 'hr']
+  }).panelInstance('content');
+},10);
+</script>
