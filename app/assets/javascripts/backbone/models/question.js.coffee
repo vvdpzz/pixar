@@ -1,3 +1,3 @@
-class App.Models.Question extends Bacbone.Model
+class App.Models.Question extends Backbone.Model
   url: ->
      "/questions/#{@.id}"

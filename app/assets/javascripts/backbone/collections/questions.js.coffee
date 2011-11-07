@@ -1,3 +1,3 @@
-class App.Collections.Questions extends Bacbone.Collection
+class App.Collections.Questions extends Backbone.Collection
   model: App.Models.Question
   url: "/questions"

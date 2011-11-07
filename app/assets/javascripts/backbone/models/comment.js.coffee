@@ -1,1 +1,1 @@
-class App.Models.Comment extends Bacbone.Model
+class App.Models.Comment extends Backbone.Model

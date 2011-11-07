@@ -1,2 +1,2 @@
-class App.Models.Answer extends Bacbone.Model
+class App.Models.Answer extends Backbone.Model
 
