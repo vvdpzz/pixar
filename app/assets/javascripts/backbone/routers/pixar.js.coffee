@@ -11,12 +11,8 @@ class App.Routers.Pixar extends Backbone.Router
     Backbone.history.start() 
     
   index: ->
-    alert "index"
   newQuestion: ->
-    alert "new"
   show: (id) ->
-    alert "show #{id}"
   profile: (id) ->
-    alert "prodile #{id}"
     
      
