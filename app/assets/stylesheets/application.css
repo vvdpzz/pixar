@@ -7,14 +7,10 @@
  *= require Aristo
  *= require questions
  *= require messages
- *= require common
+ *= require notifybar
 */
 
 body{
   padding-top: 60px;
-}
-
-html, body{
-/*  background:url(/assets/grid.png) repeat;*/
 }
 
