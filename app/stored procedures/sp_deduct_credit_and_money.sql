@@ -10,7 +10,7 @@ DROP PROCEDURE IF EXISTS sp_deduct_credit_and_money
 DELIMITER //
 CREATE PROCEDURE sp_deduct_credit_and_money (
 	in uuid bigint,
-	in user_id int,
+	in user_id bigint,
 	in title varchar(100),
 	in content text,
 	in deduct_reputation int,
