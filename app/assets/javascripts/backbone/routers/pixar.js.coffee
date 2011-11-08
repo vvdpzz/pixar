@@ -19,7 +19,7 @@ class App.Routers.Pixar extends Backbone.Router
     $("#page-container").html(@view.render().el)
 
   show: (id) ->
-    @view = new App.Views.Show
+    @view = new App.Views.Show({qid: id})
     $("#page-container").html(@view.render().el)
   profile: (id) ->
     
