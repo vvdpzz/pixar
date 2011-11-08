@@ -1,6 +1,6 @@
 class App.Routers.Pixar extends Backbone.Router
   routes:
-    ""            : "index"
+    "!/"          : "index"
     "!/new"       : "newQuestion"
     "!/:id"       : "show"
     "!/users/:id" : "profile"
@@ -11,7 +11,6 @@ class App.Routers.Pixar extends Backbone.Router
     Backbone.history.start() 
     
   index: ->
-    alert "home"
     @view = new App.Views.Index
     $('body').append(@view.render().el)
   newQuestion: ->
