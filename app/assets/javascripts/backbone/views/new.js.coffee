@@ -38,9 +38,6 @@ class App.Views.New extends Backbone.View
       end_date: @$("#date_picker").val()
     })
     
-    unless @is_communit
-      
-    
   render: ->
     $(this.el).html(@template(@model.toJSON() ))
     
