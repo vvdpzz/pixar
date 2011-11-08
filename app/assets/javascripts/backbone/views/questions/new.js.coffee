@@ -31,7 +31,7 @@ class App.Views.New extends Backbone.View
       customized_reputation = $('#customized_reputation').val()
     else 
       customized_reputation = 0
-    false unless @checkPost(@is_titleReady,@$('#new_question').find('.nicEdit-main').text().length,checked_credit,customized_reputation)
+    return false unless @checkPost(@is_titleReady,@$('#new_question').find('.nicEdit-main').text().length,checked_credit,customized_reputation)
     @model.set({
       title: @$("#title").val(),
       content: @$('#new_question').find('.nicEdit-main').html(),
