@@ -8,6 +8,7 @@
 //= require jquery-ui
 //= require underscore
 //= require backbone
+//= require backbone_datalink
 //= require backbone_rails_sync
 //= require backbone/app
 //= bootstrap-dropdown
