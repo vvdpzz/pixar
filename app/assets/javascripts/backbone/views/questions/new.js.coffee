@@ -40,10 +40,10 @@ class App.Views.New extends Backbone.View
       end_date: @$("#date_picker").val(),
       is_community: @is_community
     })
-    @model.save(
+    @model.save({},
       success: (question) =>
         @model = question
-        window.location.hash = "/#{@model.id}"
+        window.location.hash = "!/#{@model.id}"
       error: (question, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
     )
