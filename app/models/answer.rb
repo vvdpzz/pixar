@@ -14,7 +14,7 @@ class Answer < ActiveRecord::Base
     attributes.merge user: user
   end
   
-  def self.strong_accept_answer(question_id, answer_id, user_id, credit, money)
-    ActiveRecord::Base.connection.execute("call sp_answer_accept(#{question_id}, #{answer_id}, #{user_id}, #{credit}, #{money})")
+  def self.strong_accept_answer(question_id, answer_id, user_id, winner_id, reputation, credit)
+    ActiveRecord::Base.connection.execute("call sp_answer_accept(#{question_id}, #{answer_id}, #{user_id}, #{reputation}, #{credit})")
   end
 end
