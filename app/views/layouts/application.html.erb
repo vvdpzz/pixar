@@ -10,41 +10,41 @@
   <div class="topbar">
     <div class="fill">
       <div class="container">
-        <div class="container">
-          <h3><a href="#">Pixar</a></h3>
-          <ul class="nav">
-            <li class="active"><a href="#!">首页</a></li>
-            <li><a href="#">个人主页</a></li>
-            <li><a href="#!/new">提问</a></li>
-          </ul>
-          <ul class="nav secondary-nav">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle">消息</a>
-              <ul class="dropdown-menu">
-                <li><a href="#">您有 条新信息</a></li>
-                <li><a href="#">察看全部信息</a></li>
-                <li class="divider"></li>
-                <li><a href="#">退出</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle">用户</a>
-              <ul class="dropdown-menu">
-                <li><a href="#">个人设置</a></li>
-                <li><a href="#">个人记录</a></li>
-                <li class="divider"></li>
-                <li><a href="#">退出</a></li>
-              </ul>
-            </li>
-            <li><a href="#">金钱</a></li>
-            <li><a href="#">积分</a></li>
-          </ul>
-        </div>
+        <h3><a href="#">Pixar</a></h3>
+        <ul class="nav">
+          <li class="active"><a href="#!/">首页</a></li>
+          <li><a href="#!/profile">个人主页</a></li>
+          <li><a href="#!/new">提问</a></li>
+        </ul>
+        <ul class="nav secondary-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle">消息</a>
+            <ul class="dropdown-menu">
+              <li><a href="#">您有 条新信息</a></li>
+              <li><a href="#">察看全部信息</a></li>
+              <li class="divider"></li>
+              <li><a href="#">退出</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle">用户</a>
+            <ul class="dropdown-menu">
+              <li><a href="#">个人设置</a></li>
+              <li><a href="#">个人记录</a></li>
+              <li class="divider"></li>
+              <li><a href="#">退出</a></li>
+            </ul>
+          </li>
+          <li><a href="#">金钱</a></li>
+          <li><a href="#">积分</a></li>
+        </ul>
       </div>
     </div>
   </div>
-  <div id="containter" class="container">
-    <%= yield %>
+  <div id="container" class="container">
+    <div id="page-out">
+      <div id="page-container"><%= yield %></div>
+    </div>
   </div>
 </body>
 </html>
