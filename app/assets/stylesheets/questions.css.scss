@@ -1,3 +1,37 @@
+.new_question fieldset{
+  padding-top:15px;
+  background:#ddd;
+  -webkit-border-radius: 10px;
+  -webkit-border-top-left-radius: 0;
+  -moz-border-radius: 10px;
+  -moz-border-radius-topleft: 0;
+  border-radius: 10px;
+  border-top-left-radius: 0;
+}
+.new_question .active{
+  background:#fff;
+}
+.question_chose{
+  float:left;
+  background:#ddd;
+  border:2px solid #ddd;
+  text-align: center;
+  padding-top:5px;
+  width:60px;
+  height:15px;
+  -webkit-border-top-left-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  -moz-border-radius-topright: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.question_chose_free{
+  margin-left:1px;
+}
+.nicEdit-main{
+  background:#fff;
+}
 ul.questions{
   li h3{
     font-weight:normal;

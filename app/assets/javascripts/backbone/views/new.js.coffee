@@ -2,7 +2,9 @@ class App.Views.New extends Backbone.View
   template: JST["backbone/templates/questions/new"]
   
   events:
-    "submit #new-question": "save"
+    "submit #new_question": "save"
+    "click #chose_pay": "chose_pay"
+    "click #chose_free": "chose_free"
   initialize: () ->
     _.bindAll(this, 'render', 'initEffect', 'setValues')
   
@@ -17,33 +19,43 @@ class App.Views.New extends Backbone.View
   save: (e) ->
     e.preventDefault()
     e.stopPropagation()
-
-    @setvalues
-    @model.save(
+    allCheckedRules = @$('#new_question').find('input[type=checkbox]:checked')
+    checkedList = (parseInt($(e).attr('id').slice(6),10) for e in allCheckedRules)
+    @model.set({
+      title: @$("#title").val(),
+      content: @$('#new_question').find('.nicEdit-main').html(),
+      rules_list: checkedList.join(','),
+      customized_rule: @$("#additional_rule").val(),
+      end_date: @$("#date_picker").val()
+    })
+    @model.save({},
       success: (question) =>
         @model = question
-        window.location.hash = "/#{@model.id}"
+        # window.location.hash = "/#{@model.id}"
       error: (question, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
     )
     
   setValues: ->
-    allCheckedRules = @$('#new-question').find('input[type=checkbox]:checked')
-    checkedList = (parseInt($(e).attr('id').slice(6),10) for e in allCheckedRules)
-    @model.set({
-      title: @$("#title").val(),
-      content: @$('#new-question').find('.nicEdit-main').html(),
-      rules_list: checkedList.join(','),
-      customized_rule: @$("#additional_rule").val(),
-      end_date: @$("#date_picker").val()
-    })
-    
+
+        
+  chose_pay: ->
+    if @is_communit
+      @is_communit = false
+      $('#payment_terms').show()
+      $('.question_chose').removeClass('active')
+      $('#chose_pay').addClass('active')
+  
+  chose_free: ->
     unless @is_communit
-      
-    
+      @is_communit = !0
+      $('#payment_terms').hide()
+      $('.question_chose').removeClass('active')
+      $('#chose_free').addClass('active')
+  
   render: ->
     $(this.el).html(@template(@model.toJSON() ))
-    
+    @$("form").backboneLink(@model)
     this.initEffect()
     
     return this
