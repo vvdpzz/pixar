@@ -53,7 +53,7 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if question.valid?
-        Question.strong_create_question(question.id, question.user_id, question.title, question.content, question.reputation, question.credit)
+        Question.strong_create_question(question.id, question.user_id, question.title, question.content, question.reputation, question.credit, question.is_community)
         format.json { render json: question, status: :ok, location: question }
       else
         format.json { render :json => question.errors, :status => :unprocessable_entity }

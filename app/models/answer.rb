@@ -13,4 +13,8 @@ class Answer < ActiveRecord::Base
   def as_json
     attributes.merge user: user
   end
+  
+  def self.strong_accept_answer(question_id, answer_id, user_id, credit, money)
+    ActiveRecord::Base.connection.execute("call sp_answer_accept(#{question_id}, #{answer_id}, #{user_id}, #{credit}, #{money})")
+  end
 end

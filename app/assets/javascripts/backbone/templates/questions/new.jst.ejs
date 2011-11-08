@@ -1,11 +1,14 @@
-<form id="new-question" name="question">
+<form id="new_question" name="question" class="new_question ">
+  <ul class="tabs" data-tabs="tabs">
+    <li id="pay" class="active"><a>付费问题</a></li>
+    <li id="free"><a>免费问题</a></li>
+  </ul>
   <fieldset>
-    <legend>添 加 问 题</legend>
-    <!-- title -->
     <div class="clearfix new_title">
       <label for="title">标题</label>
       <div class="input">
-        <input class="xxlarge" size="30" type="text" name="title" id="title"  >
+        <input class="xxlarge" size="30" type="text" name="title" maxlength="70" id="title">
+        <span id="title_limit_num" class="num_Tips">70</span>
       </div>
     </div>
     <!-- content -->
@@ -14,7 +17,10 @@
       <div class="input new_input">
         <textarea class="xxlarge" rows="10" name="content" id="content" ></textarea>
         <span class="help-block">
-			在文本框中完成你对问题的描述
+          在文本框中完成你对问题的描述
+        </span>
+        <span id="content_Tips" class="num_Tips">
+          1000
         </span>
       </div>
     </div>
@@ -54,10 +60,10 @@
         </span>
       </div>
     </div>
-    <!-- credit -->
-    <div class="clearfix">
-      <label for="default_credit">赏金</label>
-      <div class="input">
+    <div id="payment_terms">
+      <div class="clearfix ">
+        <label for="default_credit">赏金</label>
+        <div class="input">
           <input type="radio" checked="checked" name="credit" value="1" id="default_credit">
           <span class="credit_value">¥ 1.0</span>
           <input type="radio" name="credit" value="2">
@@ -69,30 +75,32 @@
           <input type="radio" name="credit" id="radio_customized_credit">
           <span>其它: ¥</span>
           <input type="text" class="span2" name="user_credit" autocomplete="off" id="customized_credit">
+          <span id="credit_Tips" class="num_Tips"><span>
+        </div>
       </div>
-    </div>
-    <!-- reputation -->
-    <div class="clearfix">
-      <label for="reputation">积分</label>
-      <div class="input">
-        <input type="radio" checked="checked" name="reputation" value="0" id="default_reputation">
-        <span class="reputation_value">0 分</span>
-        <input type="radio" name="reputation" value="5">
-        <span class="reputation_value">5 分</span>
-        <input type="radio" name="reputation" value="10">
-        <span class="reputation_value">10 分</span>
-        <input type="radio" name="reputation" value="20">
-        <span class="reputation_value">20 分</span>
-        <input type="radio" name="reputation" id="radio_customized_reputation">
-        <span>其它: </span>
-        <input type="text" class="span2" name="user_reputation" autocomplete="off" id="customized_reputation"  >
+      <!-- reputation -->
+      <div class="clearfix chose_reputation">
+        <label for="reputation">积分</label>
+        <div class="input">
+          <input type="radio" checked="checked" name="reputation" value="0" id="default_reputation">
+          <span class="reputation_value">0 分</span>
+          <input type="radio" name="reputation" value="5">
+          <span class="reputation_value">5 分</span>
+          <input type="radio" name="reputation" value="10">
+          <span class="reputation_value">10 分</span>
+          <input type="radio" name="reputation" value="20">
+          <span class="reputation_value">20 分</span>
+          <input type="radio" name="reputation" id="radio_customized_reputation">
+          <span>其它: </span>
+          <input type="text" class="span2" name="user_reputation" autocomplete="off" id="customized_reputation"  >
+          <span id="reputation_Tips" class="num_Tips"><span>
+        </div>
       </div>
     </div>
     <div class="clearfix">
       <label for="reputation">结束日期</label>
       <div class="input">
         <input type="text" name="end_date" id="date_picker" readonly="readonly"/>
-        <input type="hidden" name="ending_date" value="" id="contest_end">
       </div>
     </div>
     <!-- actions -->
@@ -105,6 +113,6 @@
 setTimeout(function(){
   new nicEditor({
     buttonList: ['bold','italic','underline', 'strikethrough', 'ol', 'ul', 'hr']
-  }).panelInstance('content');
-},10);
-</script>
+    }).panelInstance('content');
+    },10);
+    </script>

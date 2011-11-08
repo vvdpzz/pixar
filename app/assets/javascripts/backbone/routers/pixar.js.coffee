@@ -1,6 +1,6 @@
 class App.Routers.Pixar extends Backbone.Router
   routes:
-    ""            : "index"
+    "!/"          : "index"
     "!/new"       : "newQuestion"
     "!/:id"       : "show"
     "!/users/:id" : "profile"

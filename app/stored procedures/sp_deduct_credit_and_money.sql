@@ -14,12 +14,14 @@ CREATE PROCEDURE sp_deduct_credit_and_money (
 	in title varchar(100),
 	in content text,
 	in deduct_reputation int,
-	in deduct_credit DECIMAL(8,2))
+	in deduct_credit DECIMAL(8,2),
+	in is_community boolean)
 BEGIN
-IF deduct_reputation = 0 AND deduct_credit =0.00 THEN
+IF  is_community THEN
+	START TRANSACTION;
 	INSERT INTO questions (id, content, created_at, title, updated_at, user_id) 
 	VALUES (uuid, content, NOW(), title, NOW(), user_id);
-
+	COMMIT;
 ELSE IF deduct_reputation > 0 AND deduct_credit =0.00 THEN
 	START TRANSACTION;
  	/* Create a new question */
@@ -33,7 +35,7 @@ ELSE IF deduct_reputation > 0 AND deduct_credit =0.00 THEN
  	  WHERE users.id = user_id;
 
 	/*insert into tran*/
-	INSERT INTO reputation_transactions (created_at, question_id, updated_at, user_id, reputation) VALUES (NOW(), 1, uuid, NOW(), user_id, deduct_reputation);
+	INSERT INTO reputation_transactions (created_at, question_id, updated_at, user_id, reputation) VALUES (NOW(), uuid, NOW(), user_id, deduct_reputation);
 	
 	COMMIT;
 ELSE IF deduct_reputation = 0 AND deduct_credit > 0.00 THEN
@@ -67,7 +69,7 @@ ELSE IF deduct_reputation > 0 AND deduct_credit > 0.00 THEN
  	  WHERE users.id = user_id;
 
 	/*insert into tran*/
-	INSERT INTO reputation_transactions (created_at, question_id, updated_at, user_id, reputation) VALUES (NOW(), 1, uuid, NOW(), user_id, deduct_reputation);
+	INSERT INTO reputation_transactions (created_at, question_id, updated_at, user_id, reputation) VALUES (NOW(), uuid, NOW(), user_id, deduct_reputation);
 	INSERT INTO credit_transactions (created_at, question_id, updated_at, user_id, credit) VALUES (now(), uuid, now(), user_id, deduct_credit);
 	
 	COMMIT;

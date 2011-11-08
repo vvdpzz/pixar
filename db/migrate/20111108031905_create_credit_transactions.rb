@@ -6,13 +6,9 @@ class CreateCreditTransactions < ActiveRecord::Migration
       t.integer :question_id, :limit => 8, :null => false
       t.integer :answer_id, :limit => 8, :default => 0
       t.decimal :credit, :precision => 8, :scale => 2, :default => 0.00
-      t.integer :trade_type, :default => 1
-      #1 new question
-      #2 winning
-      #3 recharging
-      t.integer :trade_status, :default => 1
-      #1 waiting for answer
-      #2 
+      t.boolean :payment, :default => true
+      t.integer :trade_type, :default => 0
+      t.integer :trade_status, :default => 0
       t.timestamps
     end
   end

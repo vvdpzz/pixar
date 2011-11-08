@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(:version => 20111108031905) do
     t.integer  "answer_id",    :limit => 8,                               :default => 0
     t.decimal  "credit",                    :precision => 8, :scale => 2, :default => 0.0
     t.integer  "trade_type",                                              :default => 1
-    t.integer  "trade_status"
+    t.integer  "trade_status",                                            :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -113,24 +113,22 @@ ActiveRecord::Schema.define(:version => 20111108031905) do
   add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"
 
   create_table "questions", :id => false, :force => true do |t|
-    t.integer  "id",                :limit => 8
-    t.integer  "user_id",           :limit => 8,                                                  :null => false
-    t.string   "title",                                                        :default => ""
+    t.integer  "id",              :limit => 8
+    t.integer  "user_id",         :limit => 8,                                                  :null => false
+    t.string   "title",                                                      :default => ""
     t.text     "content"
-    t.string   "rules_list",                                                   :default => ""
-    t.string   "customized_rule",                                              :default => ""
-    t.decimal  "credit",                         :precision => 8, :scale => 2, :default => 0.0
-    t.integer  "reputation",                                                   :default => 0
-    t.boolean  "is_blind",                                                     :default => false
-    t.boolean  "is_community",                                                 :default => false
-    t.integer  "end_date",                                                     :default => 0
-    t.integer  "votes_count",                                                  :default => 0
-    t.integer  "entries_count",                                                :default => 0
-    t.integer  "comments_count",                                               :default => 0
+    t.string   "rules_list",                                                 :default => ""
+    t.string   "customized_rule",                                            :default => ""
+    t.decimal  "credit",                       :precision => 8, :scale => 2, :default => 0.0
+    t.integer  "reputation",                                                 :default => 0
+    t.boolean  "is_blind",                                                   :default => false
+    t.boolean  "is_community",                                               :default => false
+    t.integer  "end_date",                                                   :default => 0
+    t.integer  "votes_count",                                                :default => 0
+    t.integer  "answers_count",                                              :default => 0
+    t.integer  "comments_count",                                             :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "answers_count"
-    t.integer  "correct_answer_id", :limit => 8
   end
 
   add_index "questions", ["user_id"], :name => "index_questions_on_user_id"
@@ -174,6 +172,8 @@ ActiveRecord::Schema.define(:version => 20111108031905) do
   create_table "users", :primary_key => "email", :force => true do |t|
     t.integer  "id",                     :limit => 8
     t.string   "name",                                                                :default => ""
+    t.string   "avatar",                                                              :default => ""
+    t.string   "about_me",                                                            :default => ""
     t.string   "encrypted_password",     :limit => 128,                               :default => "",  :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -191,8 +191,6 @@ ActiveRecord::Schema.define(:version => 20111108031905) do
     t.string   "authentication_token"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "avatar"
-    t.string   "about_me"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
