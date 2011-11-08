@@ -21,14 +21,12 @@ class AnswersController < ApplicationController
     
     reputation_from_system = Settings.answer_accept
     question_id,answer_id,user_id = params[:question_id], params[:id], current_user.id
-    question_info = Question.select('credit,reputation,correct_answer_id').where(:id => question_id)
-    
-    
+    question_info = Question.select('credit,reputation,correct_answer_id').find_by_id(question_id)
     if question_info.correct_answer_id == 0
-      winner_id = Answer.select('user_id').where(:id => answer_id)
+      winner_id = Answer.select('user_id').find_by_id(answer_id)
       credit,reputation = question_info.credit,question_info.reputation + Settings.answer_accept
       if winner_id != current_user.id
-        Answer.strong_accept_answer(question_id, answer_id, user_id, winner_id, credit, reputation)
+        Answer.strong_accept_answer(question_id, answer_id, user_id, winner_id, reputation, credit)
         respond_to do |format|
             render status: :ok
         end

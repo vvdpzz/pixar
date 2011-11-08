@@ -28,23 +28,27 @@ IF deduct_reputation = 0 AND deduct_credit =0.00 THEN
     COMMIT;
 ELSE IF deduct_reputation > 0 AND deduct_credit =0.00 THEN
 	START TRANSACTION;
-	UPDATE users SET credit = credit + deduct_credit WHERE id = user_id;
-	INSERT INTO reputation_transactions (answer_id, user_id, value)	VALUES (answer_id, user_id, deduct_reputation);
+	UPDATE users SET reputation = reputation + deduct_reputation WHERE id = user_id;
+	INSERT INTO reputation_transactions (question_id, user_id, answer_id, winner_id, reputation) 
+		 VALUES (question_id, user_id, answer_id, winner_id, deduct_reputation);
 	UPDATE questions SET correct_answer_id = answer_id WHERE id = question_id;
 	UPDATE answers SET is_correct = true WHERE id = answer_id;
 	COMMIT;
 ELSE IF deduct_reputation = 0 AND deduct_credit > 0.00 THEN
     START TRANSACTION;
-    UPDATE users SET money = money + deduct_money WHERE id = user_id;
-    INSERT INTO credit_transactions (answer_id, user_id, credit) VALUES (answer_id, user_id, deduct_credit);
+    UPDATE users SET credit = credit + deduct_credit WHERE id = user_id;
+    INSERT INTO credit_transactions (question_id, user_id, answer_id, winner_id, credit) 
+		 VALUES (question_id, user_id, answer_id, winner_id, deduct_credit);
     UPDATE questions SET correct_answer_id = answer_id WHERE id = question_id;
     UPDATE answers SET is_correct = true WHERE id = answer_id;
     COMMIT;
 ELSE IF deduct_reputation > 0 AND deduct_credit > 0.00 THEN
     START TRANSACTION;
-    UPDATE users SET credit = credit + deduct_credit, money = money + deduct_money WHERE id = user_id;
-    INSERT INTO reputation_transactions (answer_id, user_id, reputation) VALUES (answer_id, user_id, deduct_reputation);
-	INSERT INTO credit_transactions (answer_id, user_id, credit) VALUES (answer_id, user_id, deduct_credit);
+    UPDATE users SET credit = credit + deduct_credit, reputation = reputation + deduct_reputation WHERE id = user_id;
+	INSERT INTO reputation_transactions (question_id, user_id, answer_id, winner_id, reputation) 
+	 	 VALUES (question_id, user_id, answer_id, winner_id, deduct_reputation);
+    INSERT INTO credit_transactions (question_id, user_id, answer_id, winner_id, credit) 
+		 VALUES (question_id, user_id, answer_id, winner_id, deduct_credit);
     UPDATE questions SET correct_answer_id = answer_id WHERE id = question_id;
     UPDATE answers SET is_correct = true WHERE id = answer_id;
     COMMIT;
