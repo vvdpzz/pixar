@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
     User.select("id,name,avatar, about_me").find_by_id(id)
   end
   
+  def self.basic_hash(user_id)
+    {:user => User.select("id, name").find_by_id(user_id).serializable_hash}
+  end
+  
   # follow a user
   def follow_user!(user)
     $redis.multi do
