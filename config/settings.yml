@@ -8,6 +8,8 @@ defaults: &defaults
   question_vote_up: 5
   answers_per_page: 10
   questions_per_page: 15
+  answer_accept: 10
+  question_accept_answer: 2
 
 development:
   <<: *defaults
