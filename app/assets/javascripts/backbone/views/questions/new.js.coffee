@@ -4,7 +4,7 @@ class App.Views.New extends Backbone.View
   events:
     "submit #new-question": "save"
   initialize: () ->
-    _.bindAll(this, 'render', 'initEffect', 'setValues')
+    _.bindAll(this, 'render', 'initEffect')
   
   constructor: (options) ->
     super(options)
@@ -18,7 +18,6 @@ class App.Views.New extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
 
-    @setvalues
     @model.save(
       success: (question) =>
         @model = question
@@ -26,20 +25,6 @@ class App.Views.New extends Backbone.View
       error: (question, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
     )
-    
-  setValues: ->
-    allCheckedRules = @$('#new-question').find('input[type=checkbox]:checked')
-    checkedList = (parseInt($(e).attr('id').slice(6),10) for e in allCheckedRules)
-    @model.set({
-      title: @$("#title").val(),
-      content: @$('#new-question').find('.nicEdit-main').html(),
-      rules_list: checkedList.join(','),
-      customized_rule: @$("#additional_rule").val(),
-      end_date: @$("#date_picker").val()
-    })
-    
-    unless @is_communit
-      
     
   render: ->
     $(this.el).html(@template(@model.toJSON() ))
