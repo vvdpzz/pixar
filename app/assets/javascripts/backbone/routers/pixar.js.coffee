@@ -12,7 +12,6 @@ class App.Routers.Pixar extends Backbone.Router
     
   index: ->
   newQuestion: ->
-    alert "new"
     @view = new App.Views.New()
     $("#main-content").html(@view.render().el)
 

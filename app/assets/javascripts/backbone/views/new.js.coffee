@@ -4,7 +4,7 @@ class App.Views.New extends Backbone.View
   events:
     "submit #new-question": "save"
   initialize: () ->
-    _.bindAll(this, 'render', 'initEffect')
+    _.bindAll(this, 'render', 'initEffect', 'setValues')
   
   constructor: (options) ->
     super(options)
@@ -17,18 +17,8 @@ class App.Views.New extends Backbone.View
   save: (e) ->
     e.preventDefault()
     e.stopPropagation()
-    
-    @model.unset("errors")
-		
-    allCheckedRules = @$('#new-question').find('input[type=checkbox]:checked')
-    checkedList = (parseInt($(e).attr('id').slice(6),10) for e in allCheckedRules)
- 
-    @model.set({
-      title: @$("#title").val(),
-      content: @$('#new-question').find('.nicEdit-main').html(),
-      rules_list: checkedList.join(','),
-      end_date: @$("#date_picker").val()
-    })
+
+    @setvalues
     @model.save(
       success: (question) =>
         @model = question
@@ -36,6 +26,17 @@ class App.Views.New extends Backbone.View
       error: (question, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
     )
+    
+  setValues: ->
+    allCheckedRules = @$('#new-question').find('input[type=checkbox]:checked')
+    checkedList = (parseInt($(e).attr('id').slice(6),10) for e in allCheckedRules)
+    @model.set({
+      title: @$("#title").val(),
+      content: @$('#new-question').find('.nicEdit-main').html(),
+      rules_list: checkedList.join(','),
+      customized_rule: @$("#additional_rule").val(),
+      end_date: @$("#date_picker").val()
+    })
     
   render: ->
     $(this.el).html(@template(@model.toJSON() ))
@@ -45,7 +46,7 @@ class App.Views.New extends Backbone.View
     return this
   
   initEffect: ->
- 	  @datepicker = @$("#date_picker")
+    @datepicker = @$("#date_picker")
     @$("#customized_credit").blur().focus ->
       $("#radio_customized_credit").attr("checked",true)
     
