@@ -138,7 +138,7 @@ class QuestionsController < ApplicationController
       respond_to do |format|
         #if category_question.save
         if strong_insert
-          format.json { head :ok }
+          render status: :ok
         else
           format.json { render json: strong_inert.errors, status: :unprocessable_entity }
         end
@@ -153,7 +153,7 @@ class QuestionsController < ApplicationController
     strong_delete  = ActiveRecord::Base.connection.execute("DELETE category_questions WHERE category_id=#{category_id} and question_id=#{question_id}")
     respond_to do |format|
       if strong_delete
-        format.json { head :ok }
+        render status: :ok
       else
         format.json { render json: strong_delete.errors, status: :unprocessable_entity }
       end
@@ -175,7 +175,7 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       if strong_insert_tag
         if strong_insert
-          format.json { head :ok }
+          render status: :ok
         else
           format.json { render json: strong_inert.errors, status: :unprocessable_entity }
         end
@@ -193,7 +193,7 @@ class QuestionsController < ApplicationController
     strong_delete  = ActiveRecord::Base.connection.execute("DELETE category_questions WHERE tag_id=#{tag_id} and question_id=#{question_id}")
     respond_to do |format|
       if strong_delete
-        format.json { head :ok }
+        render status: :ok
       else
         format.json { render json: strong_delete.errors, status: :unprocessable_entity }
       end
