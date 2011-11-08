@@ -10,4 +10,10 @@
 //= require backbone
 //= require backbone_rails_sync
 //= require backbone/app
+//= bootstrap-dropdown
 //= require_tree .
+
+$(function(){
+  App.initialize();
+  $('.dropdown').dropdown()
+})
