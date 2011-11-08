@@ -24,6 +24,8 @@ gem 'redis', :require => ["redis/connection/hiredis", "redis"]
 
 gem 'activeadmin'
 
+gem 'enumerate_it'
+
 # Payment
 gem 'activemerchant'
 gem 'activemerchant_patch_for_china'
