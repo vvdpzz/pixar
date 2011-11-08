@@ -6,7 +6,7 @@ class App.Views.New extends Backbone.View
     "click #chose_pay": "chose_pay"
     "click #chose_free": "chose_free"
   initialize: () ->
-    _.bindAll(this, 'render', 'initEffect', 'setValues')
+    _.bindAll(this, 'render', 'initEffect')
   
   constructor: (options) ->
     super(options)
@@ -31,13 +31,13 @@ class App.Views.New extends Backbone.View
     @model.save({},
       success: (question) =>
         @model = question
-        # window.location.hash = "/#{@model.id}"
+        alert 2
+        window.location.hash = "!/#{@model.id}"
+        alert 3
       error: (question, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
     )
     
-  setValues: ->
-
         
   chose_pay: ->
     if @is_communit
