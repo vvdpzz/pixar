@@ -3,8 +3,8 @@ class CreateQuestions < ActiveRecord::Migration
     create_table :questions, :id => false do |t|
       t.integer :id, :limit => 8, :primary => true
       t.integer :user_id, :limit => 8, :null => false
-      t.string :title, :default => ""
-      t.text :content, :default => ""
+      t.string :title, :null => false
+      t.text :content, :null => false
       
       t.string :rules_list, :default => ""
       t.string :customized_rule, :default => ""
@@ -20,6 +20,7 @@ class CreateQuestions < ActiveRecord::Migration
       t.integer :votes_count, :default => 0
       t.integer :answers_count, :default  => 0
       t.integer :comments_count, :default => 0
+      t.integer :correct_answer_id, :limit => 8, :default => 0
 
       t.timestamps
     end

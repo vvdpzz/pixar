@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  winner_id: 1
+  question_id: 1
+  answer_id: 1
+  reputation: 1
+
+two:
+  user_id: 1
+  winner_id: 1
+  question_id: 1
+  answer_id: 1
+  reputation: 1

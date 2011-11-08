@@ -3,8 +3,8 @@ class App.Views.New extends Backbone.View
   
   events:
     "submit #new_question": "save"
-    "click #chose_pay": "chose_pay"
-    "click #chose_free": "chose_free"
+    "click #pay": "choose_pay"
+    "click #free": "choose_free"
   initialize: () ->
     _.bindAll(this, 'render', 'initEffect')
   
@@ -26,32 +26,30 @@ class App.Views.New extends Backbone.View
       content: @$('#new_question').find('.nicEdit-main').html(),
       rules_list: checkedList.join(','),
       customized_rule: @$("#additional_rule").val(),
-      end_date: @$("#date_picker").val()
+      end_date: @$("#date_picker").val(),
+      is_community: @is_community
     })
-    @model.save({},
+    @model.save(
       success: (question) =>
         @model = question
-        alert 2
-        window.location.hash = "!/#{@model.id}"
-        alert 3
+        window.location.hash = "/#{@model.id}"
       error: (question, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
     )
-    
         
-  chose_pay: ->
-    if @is_communit
-      @is_communit = false
+  choose_pay: ->
+    if @is_community
+      @is_community = false
       $('#payment_terms').show()
-      $('.question_chose').removeClass('active')
-      $('#chose_pay').addClass('active')
+      $('#free').removeClass('active')
+      $('#pay').addClass('active')
   
-  chose_free: ->
-    unless @is_communit
-      @is_communit = !0
+  choose_free: ->
+    unless @is_community
+      @is_community = true
       $('#payment_terms').hide()
-      $('.question_chose').removeClass('active')
-      $('#chose_free').addClass('active')
+      $('#pay').removeClass('active')
+      $('#free').addClass('active')
   
   render: ->
     $(this.el).html(@template(@model.toJSON() ))
