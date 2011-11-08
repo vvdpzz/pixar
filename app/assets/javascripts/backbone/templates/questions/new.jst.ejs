@@ -7,7 +7,8 @@
     <div class="clearfix new_title">
       <label for="title">标题</label>
       <div class="input">
-        <input class="xxlarge" size="30" type="text" name="title" id="title"  >
+        <input class="xxlarge" size="30" type="text" name="title" maxlength="70" id="title">
+        <span id="title_limit_num" class="num_Tips">70</span>
       </div>
     </div>
     <!-- content -->
@@ -17,6 +18,9 @@
         <textarea class="xxlarge" rows="10" name="content" id="content" ></textarea>
         <span class="help-block">
           在文本框中完成你对问题的描述
+        </span>
+        <span id="content_Tips" class="num_Tips">
+          1000
         </span>
       </div>
     </div>
@@ -71,6 +75,7 @@
           <input type="radio" name="credit" id="radio_customized_credit">
           <span>其它: ¥</span>
           <input type="text" class="span2" name="user_credit" autocomplete="off" id="customized_credit">
+          <span id="credit_Tips" class="num_Tips"><span>
         </div>
       </div>
       <!-- reputation -->
@@ -88,6 +93,7 @@
           <input type="radio" name="reputation" id="radio_customized_reputation">
           <span>其它: </span>
           <input type="text" class="span2" name="user_reputation" autocomplete="off" id="customized_reputation"  >
+          <span id="reputation_Tips" class="num_Tips"><span>
         </div>
       </div>
     </div>
