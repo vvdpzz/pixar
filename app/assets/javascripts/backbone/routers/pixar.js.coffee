@@ -4,7 +4,8 @@ class App.Routers.Pixar extends Backbone.Router
     "!/new"       : "newQuestion"
     "!/:id"       : "show"
     "!/users/:id" : "profile"
-    ".*"        : "index"
+    "!/messages"  : "messages"
+    ".*"          : "index"
 
     
   initialize: ->
@@ -12,12 +13,16 @@ class App.Routers.Pixar extends Backbone.Router
     
   index: ->
     @view = new App.Views.Index
-    $('body').append(@view.render().el)
+    $("#page-container").html(@view.render().el)
   newQuestion: ->
-    @view = new App.Views.New()
-    $("#main-content").html(@view.render().el)
+    @view = new App.Views.New
+    $("#page-container").html(@view.render().el)
 
   show: (id) ->
+    @view = new App.View.show
+    $("#page-container").html(@view.render().el)
   profile: (id) ->
+    
+  messages: ->
     
      

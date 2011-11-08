@@ -1,20 +1,22 @@
 class App.Views.Index extends Backbone.View
-  el: '#containter'
+  id: "page-node-home"
   template: JST["backbone/templates/questions/index"]
   initialize: ->
     _.bindAll(this, 'render', 'loadMain')
-    @questins = new App.Collections.Questions
+    @questions = new App.Collections.Questions
   
   render: ->
-    if @questins.length 
+    $(@el).html(@template)
+    if @questions.length 
       @loadMain()
     else
       that = this
-      @questins.fetch
+      @questions.fetch
         success: =>
           that.loadMain()
+    return this
    
   loadMain: ->
-    @questionsView = new App.Views.Questions({collection: @questins})
+    @questionsView = new App.Views.Questions({collection: @questions})
     @$("#main-content").html(@questionsView.render().el)
   

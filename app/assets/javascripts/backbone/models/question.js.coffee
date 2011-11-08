@@ -5,3 +5,4 @@ class App.Models.Question extends Backbone.Model
       "/questions"
     else
       "/questions/#{@id}"
+  

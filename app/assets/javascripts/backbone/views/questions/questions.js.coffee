@@ -1,4 +1,5 @@
 class App.Views.Questions extends Backbone.View
+  tagName: 'ul'
   className: "questions"
   item_template: JST["backbone/templates/questions/question_item"]
   
@@ -10,7 +11,6 @@ class App.Views.Questions extends Backbone.View
     return this 
     
   addOne: (question) ->
-    
     $(@el).append(@item_template(question.toJSON()))
   
   addAll: ->
