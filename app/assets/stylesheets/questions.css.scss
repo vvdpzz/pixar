@@ -93,14 +93,14 @@ ul.questions{
 }
 
 .article .article-foot, .article .article-head-thin {
-height: 9px;
-position: relative;
-background-color: #E7E7E7;
-border: 1px solid #C3D5DA;
+  height: 9px;
+  position: relative;
+  background-color: #E7E7E7;
+  border: 1px solid #C3D5DA;
 }
 .article .article-foot {
-border: 1px solid #9EB4BD;
-background-color: #ACC3CC;
+  border: 1px solid #9EB4BD;
+  background-color: #ACC3CC;
 }
 
 .article p{
@@ -108,14 +108,117 @@ background-color: #ACC3CC;
   line-height:1.6;
 }
 
-.question_detail_buttons{
-  text-align:center;
-  padding:20px 0;
-}
 #date_picker{
-cursor: pointer;
-height: 25px;
-width: 152px;
-font-size: 15px;
-background: url(/assets/calendar-icon.png) no-repeat 135px 6px white;
+  cursor: pointer;
+  height: 25px;
+  width: 152px;
+  font-size: 15px;
+  background: url(/assets/calendar-icon.png) no-repeat 135px 6px white;
+}
+#page-node-show #main-content{
+  float: left;
+  height: 100%;
+  min-height: 700px;
+  width: 640px;
+  z-index: 4;
+  padding-bottom: 15px;
+}
+/*question detail*/
+.question-detail {
+  background-color: #FEFBF3;
+  width: 640px;
+  min-height: 50px;
+}
+.question-detail-header {
+  width: 620px;
+  margin: 0;
+  padding: 10px 9px 0;
+  border: 1px solid #CCC;
+  border-bottom: none;
+  border-image: initial;
+  .detail-prize-zone{
+    -webkit-box-shadow: 0 3px 3px -1px #aaa;
+    -moz-box-shadow: 0 3px 3px -1px #aaa;
+    float: left;
+    font-size: 26px;
+    font-weight: bold;
+    width: 100px;
+    height: 80px;
+    margin-top: -15px;
+  }
+}
+.detail-info-zone {
+  float: left;
+  width: 509px;
+  padding-left: 10px;
+  .detail-title {
+    width: 500px;
+    text-shadow: 0 1px 0 white;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 32px;
+    word-wrap: break-word;
+  }
+  .question-extend-info {
+    float: left;
+    line-height: 30px;
+    width: 509px;
+    .unfollow-question, .follow-question {
+      float: left;
+      margin-right: 5px;
+    }
+    .left-time-area {
+      float: left;
+      height: 30px;
+    }
+  }
+}
+.detail-body {
+  width: 620px;
+  line-height: 20px;
+  border-right: 1px solid #CCC;
+  border-left: 1px solid #CCC;
+  border-top: none;
+  margin: 0;
+  padding: 0 9px 10px;
+  .question-detail-content {
+    width: 620px;
+    margin: 0;
+    padding-bottom: 10px;
+  }
+  .submission-rules {
+    margin: 10px 0;
+  }
+}
+.question-detail-buttons {
+  width: 638px;
+  margin: 0;
+  padding-bottom: 15px;
+  border: 1px solid gainsboro;
+  border-top: none;
+  border-bottom: none;
+  text-align: center;
+  border-image: initial;
+}
+#question-comment {
+  border-top: medium none;
+  border-bottom: 1px solid #CCC;
+  padding: 0 9px 10px;
+  width: 620px;
+  border-left: 1px solid #CCC;
+  border-right: 1px solid #CCC;
+  border-top: medium none;
+  line-height: 20px;
+  margin-top: -10px;
+}
+.detail-bottom-border {
+  border-bottom: 1px solid #CCC;
+}
+.contest-detail-padding {
+  padding-top: 10px;
+}
+.question-bottom-shadow {
+  width: 640px;
+  height: 15px;
+  background: url(/assets/question-detail-shadow.png) no-repeat top center transparent;
 }
