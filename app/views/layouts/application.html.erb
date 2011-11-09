@@ -11,9 +11,9 @@
     <div class="fill">
       <div class="container">
         <h3><a href="#">Pixar</a></h3>
-        <ul class="nav">
+        <ul id="top_nav" class="nav">
           <li class="active"><a href="#!/">首页</a></li>
-          <li><a href="#!/profile">个人主页</a></li>
+          <li><a href="#!/users/<%=current_user.id%>">个人主页</a></li>
           <li><a href="#!/new">提问</a></li>
         </ul>
         <ul class="nav secondary-nav">
@@ -21,7 +21,7 @@
             <a class="dropdown-toggle">消息</a>
             <ul class="dropdown-menu">
               <li><a href="#">您有 条新信息</a></li>
-              <li><a href="#">察看全部信息</a></li>
+              <li><a href="#!/messages">察看全部信息</a></li>
               <li class="divider"></li>
               <li><a href="#">退出</a></li>
             </ul>
