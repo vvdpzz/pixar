@@ -1,7 +1,19 @@
-<div class="question_item alert-message block-message warning">
-  <h4><a href="#!/<%= id %>"><%= title %></a></h4>
-  <p>
-    <a href="#!/<%= id %>/edit">修改</a>
-    <a href="#!/<%= id %>/destroy" class="destroy">删除</a>
-  </p>
+<div class="home-feed feed-bottom-line clearfix">   
+  <a class="feed-badge badge-overoneday" href="">
+    <div class="prize"><%=credit%>元</div>
+    <div class="time-left-cap">剩余时间</div>
+    <div class="time-left "><%=end_date%>天</div>
+  </a>
+  <div class="feed-body clearfix">
+    <a href="" class="contest-title"><%=title%></a>
+    <a href="#" class="contest-follow blue" followed="0">关注</a>
+    <span class="contest-entries gray">·</span>
+    <span class="contest-entries gray"><%=answers_count%>人参与回答</span>
+    <div class="contest-preview">
+      <div class="contest-description ellipsis multiline truncate" url="">
+        <%=content%>
+
+      </div>
+    </div>
+  </div>
 </div>

@@ -88,13 +88,14 @@ ActiveRecord::Schema.define(:version => 20111108031905) do
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "credit_transactions", :force => true do |t|
-    t.integer  "user_id",      :limit => 8,                                                :null => false
+    t.integer  "user_id",      :limit => 8,                                                 :null => false
     t.integer  "winner_id",    :limit => 8,                               :default => 0
-    t.integer  "question_id",  :limit => 8,                                                :null => false
+    t.integer  "question_id",  :limit => 8,                                                 :null => false
     t.integer  "answer_id",    :limit => 8,                               :default => 0
     t.decimal  "credit",                    :precision => 8, :scale => 2, :default => 0.0
-    t.integer  "trade_type",                                              :default => 1
-    t.integer  "trade_status",                                            :default => 1
+    t.boolean  "payment",                                                 :default => true
+    t.integer  "trade_type",                                              :default => 0
+    t.integer  "trade_status",                                            :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -113,20 +114,21 @@ ActiveRecord::Schema.define(:version => 20111108031905) do
   add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"
 
   create_table "questions", :id => false, :force => true do |t|
-    t.integer  "id",              :limit => 8
-    t.integer  "user_id",         :limit => 8,                                                  :null => false
-    t.string   "title",                                                      :default => ""
-    t.text     "content"
-    t.string   "rules_list",                                                 :default => ""
-    t.string   "customized_rule",                                            :default => ""
-    t.decimal  "credit",                       :precision => 8, :scale => 2, :default => 0.0
-    t.integer  "reputation",                                                 :default => 0
-    t.boolean  "is_blind",                                                   :default => false
-    t.boolean  "is_community",                                               :default => false
-    t.integer  "end_date",                                                   :default => 0
-    t.integer  "votes_count",                                                :default => 0
-    t.integer  "answers_count",                                              :default => 0
-    t.integer  "comments_count",                                             :default => 0
+    t.integer  "id",                :limit => 8
+    t.integer  "user_id",           :limit => 8,                                                  :null => false
+    t.string   "title",                                                                           :null => false
+    t.text     "content",                                                                         :null => false
+    t.string   "rules_list",                                                   :default => ""
+    t.string   "customized_rule",                                              :default => ""
+    t.decimal  "credit",                         :precision => 8, :scale => 2, :default => 0.0
+    t.integer  "reputation",                                                   :default => 0
+    t.boolean  "is_blind",                                                     :default => false
+    t.boolean  "is_community",                                                 :default => false
+    t.integer  "end_date",                                                     :default => 0
+    t.integer  "votes_count",                                                  :default => 0
+    t.integer  "answers_count",                                                :default => 0
+    t.integer  "comments_count",                                               :default => 0
+    t.integer  "correct_answer_id", :limit => 8,                               :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -146,12 +148,14 @@ ActiveRecord::Schema.define(:version => 20111108031905) do
   add_index "recharge_records", ["user_id"], :name => "index_recharge_records_on_user_id"
 
   create_table "reputation_transactions", :force => true do |t|
-    t.integer  "user_id",     :limit => 8,                :null => false
-    t.integer  "winner_id",   :limit => 8, :default => 0
-    t.integer  "question_id", :limit => 8,                :null => false
-    t.integer  "answer_id",   :limit => 8, :default => 0
-    t.integer  "reputation",                              :null => false
-    t.integer  "trade_type",               :default => 1
+    t.integer  "user_id",      :limit => 8,                   :null => false
+    t.integer  "winner_id",    :limit => 8, :default => 0
+    t.integer  "question_id",  :limit => 8,                   :null => false
+    t.integer  "answer_id",    :limit => 8, :default => 0
+    t.integer  "reputation",                                  :null => false
+    t.boolean  "payment",                   :default => true
+    t.integer  "trade_type",                :default => 0
+    t.integer  "trade_status",              :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -82,25 +82,13 @@ class App.Views.New extends Backbone.View
       $('#payment_terms').hide()
       $('#pay').removeClass('active')
       $('#free').addClass('active')
-  
+      
   titleCountDown: ->
-    maxLength = 70
-    numDiv = $('#title_limit_num')
-    titleInput = $("#title")
-    if(titleInput.val())
-      limit_num = maxLength - titleInput.val().length;
-      numDiv.text(limit_num)
-      if(limit_num<0)
-        numDiv.addClass('negative')
-        @is_titleReady = false
-      else
-        numDiv.removeClass('negative')
-        @is_titleReady = true
-    else
-      numDiv.text(maxLength);
-      @is_titleReady = false
-  
-  
+    inputCountDown($('#title'),$('#title_limit_num'),70)
+    
+  contentCountDown: ->
+    inputCountDown($(".nicEdit-main"),$('#content_Tips'),1000)
+    
   checkNum:(str)->
     mynumber="0123456789"; 
     i = 0
@@ -112,24 +100,7 @@ class App.Views.New extends Backbone.View
         return false
       i++        
     true
-  
-  contentCountDown: ->
-    maxLength = 1000
-    numDiv = $('#content_Tips')
-    titleInput = $(".nicEdit-main")
-    if(titleInput.text())
-      limit_num = maxLength - titleInput.text().length;
-      numDiv.text(limit_num)
-      if(limit_num<0)
-        numDiv.addClass('negative')
-        @is_titleReady = false
-      else
-        numDiv.removeClass('negative')
-        @is_titleReady = true
-    else
-      numDiv.text(maxLength);
-      @is_titleReady = false
-  
+
   render: ->
     $(this.el).html(@template(@model.toJSON() ))
     @$("form").backboneLink(@model)

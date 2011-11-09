@@ -18,5 +18,5 @@ class App.Views.Index extends Backbone.View
    
   loadMain: ->
     @questionsView = new App.Views.Questions({collection: @questions})
-    @$("#main-content").html(@questionsView.render().el)
+    @$("#question-content-container").html(@questionsView.render().el)
   

@@ -10,7 +10,7 @@ window.App =
   Collections: {}
   Routers: {}
   Views: {}
-
+  
   initialize: ->
     new App.Routers.Pixar
   
@@ -40,3 +40,17 @@ window.App =
         html: msgHtml
         speed: realSpeed
         container: container
+ 
+window.inputCountDown = (input,show,len) ->
+  maxLength = len
+  numDiv = show
+  if(len = if input.val().length then input.val().length else input.text().length)
+    limit_num = maxLength - len;
+    numDiv.text(limit_num)
+    if(limit_num<0)
+      numDiv.addClass('negative')
+    else
+      numDiv.removeClass('negative')
+  else
+    numDiv.text(maxLength);
+    

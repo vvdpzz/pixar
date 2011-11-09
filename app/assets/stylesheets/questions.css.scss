@@ -123,6 +123,74 @@ ul.questions{
   z-index: 4;
   padding-bottom: 15px;
 }
+/*question_item*/
+.feed-bottom-line {
+  border-bottom: 1px solid #CCC;
+}
+.badge-overoneday {
+  /*background: url(../../../ce6/images/prizebage-gradient.png) left 0;*/
+  min-height: 80px;
+}
+.home-feed {
+  padding: 10px;
+  background-color: white;
+  border-left: 1px solid #CCC;
+  border-right: 1px solid #CCC;
+  min-height: 90px;
+}
+.feed-badge {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-box-shadow: 0 3px 3px -1px #aaa;
+  -webkit-box-shadow: 0 3px 3px -1px #aaa;
+  border-radius: 4px;
+  float: left;
+  text-align: center;
+  width: 80px;
+  display: block;
+}
+.feed-body {
+  margin: 0 1px 0 95px;
+}
+.feed-body .contest-title {
+  font-size: 17px;
+  font-weight: bold;
+  .contest-follow {
+    margin-left: 2px;
+    margin-right: 5px;
+  }
+  .contest-entries{
+    margin-left: 2px;
+  }
+  .contest-description {
+    font-size: 13px;
+    line-height: 19px;
+    width: 100%;
+    word-wrap: break-word;
+    margin: 5px 0;
+    max-height: 60px;
+  }
+  .blue {
+    font-size: 12px;
+    color: #005DCE;
+  }
+  
+}
+.contest-preview {
+  margin-bottom: 5px;
+}
+.container-tab{
+  margin: 0 0 0 25px;
+}
+.container-tab li{
+  margin-left:100px;
+}
+
+
+
+
+
+
 /*question detail*/
 .question-detail {
   background-color: #FEFBF3;
