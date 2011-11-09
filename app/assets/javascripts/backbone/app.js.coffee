@@ -40,7 +40,7 @@ window.App =
         html: msgHtml
         speed: realSpeed
         container: container
- 
+
 window.inputCountDown = (input,show,len) ->
   maxLength = len
   numDiv = show
@@ -52,5 +52,12 @@ window.inputCountDown = (input,show,len) ->
     else
       numDiv.removeClass('negative')
   else
-    numDiv.text(maxLength);
+    numDiv.text(maxLength)
+
+window.RULES = [
+  ""
+  " 相似答案，先答为胜"
+  " 答案需要包含图片"
+  " 答案不能少于200字"
+]
     

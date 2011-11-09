@@ -21,4 +21,5 @@ class App.Views.Show extends Backbone.View
       @question.fetch
         success: =>
           that.$("#main-content").append(@question_detail.render().el).append(@bottom_shadow_template)
+    
 

@@ -10,7 +10,6 @@ defaults: &defaults
   questions_per_page: 15
   answer_accept: 10
   question_accept_answer: 2
-
 #transaction type
   t_answer_accepted: 10
   t_question_accept_answer: 11
