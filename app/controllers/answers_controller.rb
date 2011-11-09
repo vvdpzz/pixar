@@ -19,14 +19,15 @@ class AnswersController < ApplicationController
     #:trade_type => TradeType::ACCEPT,
     #:trade_status => TradeStatus::SUCCESS
     
-    reputation_from_system = Settings.answer_accept
     question_id,answer_id,user_id = params[:question_id], params[:id], current_user.id
+    
     question_info = Question.select('credit,reputation,correct_answer_id').find_by_id(question_id)
     if question_info.correct_answer_id == 0
       winner_id = Answer.select('user_id').find_by_id(answer_id)
-      credit,reputation = question_info.credit,question_info.reputation + Settings.answer_accept
+      reputation_for_winner,reputation_for_asker = question_info.reputation + Settings.answer_accept, Settings.question_accept_answer
+      transaction_from_system_for_winner, transaction_from_system_for_asker = Settings.t_answer_accept, Settings.t_question_accept_answer
       if winner_id != current_user.id
-        Answer.strong_accept_answer(question_id, answer_id, user_id, winner_id, reputation, credit)
+        Answer.strong_accept_answer(question_id,answer_id,asker_id,winner_id,reputation_for_winner,reputation_for_asker,question_info.credit,transaction_from_system_for_winner,transaction_from_system_for_asker)
         respond_to do |format|
             render status: :ok
         end

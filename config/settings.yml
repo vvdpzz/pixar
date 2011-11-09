@@ -11,6 +11,10 @@ defaults: &defaults
   answer_accept: 10
   question_accept_answer: 2
 
+#transaction type
+  t_answer_accepted: 10
+  t_question_accept_answer: 11
+  
 development:
   <<: *defaults
 
