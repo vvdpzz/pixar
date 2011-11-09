@@ -38,7 +38,7 @@ IF credit_for_winner = 0.00 THEN
 	UPDATE questions SET correct_answer_id = answer_id WHERE id = question_id;
 	UPDATE answers SET is_correct = true WHERE id = answer_id;
 	COMMIT;
-ELSE credit_for_winner > 0.00 THEN
+ELSE IF credit_for_winner > 0.00 THEN
     START TRANSACTION;
     INSERT INTO reputation_transactions (question_id, answer_id, receiver_id, reputation, trade_type) 
     	 VALUES (question_id, answer_id, winner_id, reputation_for_winner, transaction_from_system_for_winner);
