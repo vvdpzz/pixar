@@ -18,42 +18,42 @@ CREATE PROCEDURE sp_answer_accept (
 	in answer_id bigint,
 	in user_id bigint,
 	in winner_id bigint,
-	in deduct_reputation int,
-	in deduct_credit DECIMAL(8,2))
+	in reputation_for_asker int,
+	in reputation_for_winner int,
+	in credit_for_winner DECIMAL(8,2),
+	in transaction_from_system_for_winner int,
+	in transaction_from_system_for_asker int)
 BEGIN
-IF deduct_reputation = 0 AND deduct_credit =0.00 THEN
-    START TRANSACTION;
-    UPDATE questions SET correct_answer_id = answer_id WHERE id = question_id;
-    UPDATE answers SET is_correct = true WHERE id = answer_id;
-    COMMIT;
-ELSE IF deduct_reputation > 0 AND deduct_credit =0.00 THEN
+IF credit_for_winner = 0.00 THEN
 	START TRANSACTION;
-	UPDATE users SET reputation = reputation + deduct_reputation WHERE id = user_id;
-	INSERT INTO reputation_transactions (question_id, user_id, answer_id, winner_id, reputation) 
-		 VALUES (question_id, user_id, answer_id, winner_id, deduct_reputation);
+	#give reputation to winner
+	INSERT INTO reputation_transactions (question_id, answer_id, receiver_id, reputation, trade_type) 
+		 VALUES (question_id, answer_id, winner_id, reputation_for_winner, transaction_from_system_for_winner);
+	UPDATE users SET reputation = reputation + reputation_for_winner WHERE id = winner_id;
+	
+	INSERT INTO reputation_transactions (question_id, answer_id, receiver_id, reputation, trade_type) 
+		 VALUES (question_id, answer_id, winner_id, reputation_for_asker, transaction_from_system_for_asker);
+	UPDATE users SET reputation = reputation + reputation_for_asker WHERE id = user_id;
+	
 	UPDATE questions SET correct_answer_id = answer_id WHERE id = question_id;
 	UPDATE answers SET is_correct = true WHERE id = answer_id;
 	COMMIT;
-ELSE IF deduct_reputation = 0 AND deduct_credit > 0.00 THEN
+ELSE credit_for_winner > 0.00 THEN
     START TRANSACTION;
-    UPDATE users SET credit = credit + deduct_credit WHERE id = user_id;
-    INSERT INTO credit_transactions (question_id, user_id, answer_id, winner_id, credit) 
-		 VALUES (question_id, user_id, answer_id, winner_id, deduct_credit);
+    INSERT INTO reputation_transactions (question_id, answer_id, receiver_id, reputation, trade_type) 
+    	 VALUES (question_id, answer_id, winner_id, reputation_for_winner, transaction_from_system_for_winner);
+    
+	INSERT INTO credit_transactions (question_id, answer_id, receiver_id, credit_for_winner, trade_type) 
+	 	 VALUES (question_id, answer_id, winner_id, credit_for_winner, transaction_from_system_for_winner);
+	UPDATE users SET credit = credit + credit_for_winner, reputation = reputation + reputation_for_winner WHERE id = winner_id;
+
+    INSERT INTO reputation_transactions (question_id, answer_id, receiver_id, reputation, trade_type) 
+    	 VALUES (question_id, answer_id, winner_id, reputation_for_asker, transaction_from_system_for_asker);
+    UPDATE users SET reputation = reputation + reputation_for_asker WHERE id = user_id;
+
     UPDATE questions SET correct_answer_id = answer_id WHERE id = question_id;
     UPDATE answers SET is_correct = true WHERE id = answer_id;
     COMMIT;
-ELSE IF deduct_reputation > 0 AND deduct_credit > 0.00 THEN
-    START TRANSACTION;
-    UPDATE users SET credit = credit + deduct_credit, reputation = reputation + deduct_reputation WHERE id = user_id;
-	INSERT INTO reputation_transactions (question_id, user_id, answer_id, winner_id, reputation) 
-	 	 VALUES (question_id, user_id, answer_id, winner_id, deduct_reputation);
-    INSERT INTO credit_transactions (question_id, user_id, answer_id, winner_id, credit) 
-		 VALUES (question_id, user_id, answer_id, winner_id, deduct_credit);
-    UPDATE questions SET correct_answer_id = answer_id WHERE id = question_id;
-    UPDATE answers SET is_correct = true WHERE id = answer_id;
-    COMMIT;
-end if;
-end if;
 end if;
 end if;
 END

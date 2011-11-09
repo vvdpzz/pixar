@@ -34,6 +34,6 @@ class Question < ActiveRecord::Base
   end
   
   def self.strong_create_question(id, user_id, title, content, reputation, credit, is_community)
-    ActiveRecord::Base.connection.execute("call sp_deduct_credit_and_money(#{id},#{user_id},\"#{title}\",\"#{content}\",#{reputation},#{credit},#{is_community})")
+    ActiveRecord::Base.connection.execute("call sp_deduct_credit_and_money(#{id},#{user_id},'#{title}','#{content}',#{reputation},#{credit},#{is_community})")
   end
 end
